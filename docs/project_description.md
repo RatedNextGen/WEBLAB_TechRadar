@@ -8,15 +8,7 @@ Für die Umsetzung des Projekts ist folgender Technologie-Stack vorgesehen:
 * **Frontend**: Angular
 * **Backend**: ExpressJS
 * **Datenbank**: MongoDB
-* **Containerisierung**: Docker
 * **VCS**: GitHub Repo: https://github.com/RatedNextGen/WEBLAB_TechRadar
-
-## Architektur & Containerisierung
-Das Projekt wird als Monorepo mit Nx verwaltet, um bessere Modularität und optimierte Builds zu ermöglichen.
-Die Anwendung wird so konzipiert, dass sie mit Docker gestartet werden kann. Dafür sind folgende Container vorgesehen:
-* UI-Container: Beinhaltet das Angular-Frontend
-* Backend-Container: Hosten der ExpressJS-Anwendung
-* Datenbank-Container: MongoDB zur Datenspeicherung
 
 ## CI/CD & Automatisierung
 Für die Entwicklung und Qualitätssicherung werden einfache Build- und Test-Stages mit GitHub Actions eingerichtet.
