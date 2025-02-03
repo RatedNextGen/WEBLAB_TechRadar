@@ -1,28 +1,28 @@
 {
-  "name": "tech-radar",
+  "name": "ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/tech-radar/src",
+  "sourceRoot": "apps/ui/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/tech-radar",
-        "index": "apps/tech-radar/src/index.html",
-        "browser": "apps/tech-radar/src/main.ts",
+        "outputPath": "dist/apps/ui",
+        "index": "apps/ui/src/index.html",
+        "browser": "apps/ui/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/tech-radar/tsconfig.app.json",
+        "tsConfig": "apps/ui/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/tech-radar/public"
+            "input": "apps/ui/public"
           }
         ],
-        "styles": ["apps/tech-radar/src/styles.scss"],
+        "styles": ["apps/ui/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -53,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "tech-radar:build:production"
+          "buildTarget": "ui:build:production"
         },
         "development": {
-          "buildTarget": "tech-radar:build:development"
+          "buildTarget": "ui:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "tech-radar:build"
+        "buildTarget": "ui:build"
       }
     },
     "lint": {
@@ -74,15 +74,15 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/tech-radar/jest.config.ts"
+        "jestConfig": "apps/ui/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "tech-radar:build",
+        "buildTarget": "ui:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/tech-radar/browser",
+        "staticFilePath": "dist/apps/ui/browser",
         "spa": true
       }
     }

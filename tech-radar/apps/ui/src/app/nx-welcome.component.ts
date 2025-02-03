@@ -16,24 +16,27 @@ import { CommonModule } from '@angular/common';
       html {
         -webkit-text-size-adjust: 100%;
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-          'Noto Color Emoji';
+        'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
         line-height: 1.5;
         tab-size: 4;
         scroll-behavior: smooth;
       }
+
       body {
         font-family: inherit;
         line-height: inherit;
         margin: 0;
       }
+
       h1,
       h2,
       p,
       pre {
         margin: 0;
       }
+
       *,
       ::before,
       ::after {
@@ -42,46 +45,56 @@ import { CommonModule } from '@angular/common';
         border-style: solid;
         border-color: currentColor;
       }
+
       h1,
       h2 {
         font-size: inherit;
         font-weight: inherit;
       }
+
       a {
         color: inherit;
         text-decoration: inherit;
       }
+
       pre {
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          'Liberation Mono', 'Courier New', monospace;
+        'Liberation Mono', 'Courier New', monospace;
       }
+
       svg {
         display: block;
         vertical-align: middle;
       }
+
       svg {
         shape-rendering: auto;
         text-rendering: optimizeLegibility;
       }
+
       pre {
         background-color: rgba(55, 65, 81, 1);
         border-radius: 0.25rem;
         color: rgba(229, 231, 235, 1);
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          'Liberation Mono', 'Courier New', monospace;
+        'Liberation Mono', 'Courier New', monospace;
         overflow: auto;
         padding: 0.5rem 0.75rem;
       }
+
       .shadow {
         box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
+
       .rounded {
         border-radius: 1.5rem;
       }
+
       .wrapper {
         width: 100%;
       }
+
       .container {
         margin-left: auto;
         margin-right: auto;
@@ -92,15 +105,18 @@ import { CommonModule } from '@angular/common';
         color: rgba(55, 65, 81, 1);
         width: 100%;
       }
+
       #welcome {
         margin-top: 2.5rem;
       }
+
       #welcome h1 {
         font-size: 3rem;
         font-weight: 500;
         letter-spacing: -0.025em;
         line-height: 1;
       }
+
       #welcome span {
         display: block;
         font-size: 1.875rem;
@@ -108,6 +124,7 @@ import { CommonModule } from '@angular/common';
         line-height: 2.25rem;
         margin-bottom: 0.5rem;
       }
+
       #hero {
         align-items: center;
         background-color: hsla(214, 62%, 21%, 1);
@@ -118,15 +135,18 @@ import { CommonModule } from '@angular/common';
         grid-template-columns: 1fr;
         margin-top: 3.5rem;
       }
+
       #hero .text-container {
         color: rgba(255, 255, 255, 1);
         padding: 3rem 2rem;
       }
+
       #hero .text-container h2 {
         font-size: 1.5rem;
         line-height: 2rem;
         position: relative;
       }
+
       #hero .text-container h2 svg {
         color: hsla(162, 47%, 50%, 1);
         height: 2rem;
@@ -135,9 +155,11 @@ import { CommonModule } from '@angular/common';
         top: 0;
         width: 2rem;
       }
+
       #hero .text-container h2 span {
         margin-left: 2.5rem;
       }
+
       #hero .text-container a {
         background-color: rgba(255, 255, 255, 1);
         border-radius: 0.75rem;
@@ -147,30 +169,36 @@ import { CommonModule } from '@angular/common';
         padding: 1rem 2rem;
         text-decoration: inherit;
       }
+
       #hero .logo-container {
         display: none;
         justify-content: center;
         padding-left: 2rem;
         padding-right: 2rem;
       }
+
       #hero .logo-container svg {
         color: rgba(255, 255, 255, 1);
         width: 66.666667%;
       }
+
       #middle-content {
         align-items: flex-start;
         display: grid;
         grid-template-columns: 1fr;
         margin-top: 3.5rem;
       }
+
       #middle-content #middle-left-content {
         display: flex;
         flex-direction: column;
         gap: 2rem;
       }
+
       #learning-materials {
         padding: 2.5rem 2rem;
       }
+
       #learning-materials h2 {
         font-weight: 500;
         font-size: 1.25rem;
@@ -179,6 +207,7 @@ import { CommonModule } from '@angular/common';
         padding-left: 1rem;
         padding-right: 1rem;
       }
+
       .list-item-link {
         align-items: center;
         border-radius: 0.75rem;
@@ -186,30 +215,33 @@ import { CommonModule } from '@angular/common';
         margin-top: 1rem;
         padding: 1rem;
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
         width: 100%;
       }
+
       .list-item-link svg:first-child {
         margin-right: 1rem;
         height: 1.5rem;
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
         width: 1.5rem;
       }
+
       .list-item-link > span {
         flex-grow: 1;
         font-weight: 400;
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       }
+
       .list-item-link > span > span {
         color: rgba(107, 114, 128, 1);
         display: block;
@@ -218,10 +250,11 @@ import { CommonModule } from '@angular/common';
         font-weight: 300;
         line-height: 1rem;
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       }
+
       .list-item-link svg:last-child {
         height: 1rem;
         transition-property: all;
@@ -229,6 +262,7 @@ import { CommonModule } from '@angular/common';
         transition-duration: 150ms;
         width: 1rem;
       }
+
       .list-item-link:hover {
         color: rgba(255, 255, 255, 1);
         background-color: hsla(162, 55%, 33%, 1);
@@ -237,6 +271,7 @@ import { CommonModule } from '@angular/common';
       .list-item-link:hover > span > span {
         color: rgba(243, 244, 246, 1);
       }
+
       .list-item-link:hover svg:last-child {
         transform: translateX(0.25rem);
       }
@@ -246,21 +281,23 @@ import { CommonModule } from '@angular/common';
         margin-bottom: 2rem;
         transition-duration: 300ms;
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         align-items: center;
         display: flex;
       }
+
       .button-pill svg {
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
         flex-shrink: 0;
         width: 3rem;
       }
+
       .button-pill > span {
         letter-spacing: -0.025em;
         font-weight: 400;
@@ -269,51 +306,64 @@ import { CommonModule } from '@angular/common';
         padding-left: 1rem;
         padding-right: 1rem;
       }
+
       .button-pill span span {
         display: block;
         font-size: 0.875rem;
         font-weight: 300;
         line-height: 1.25rem;
       }
+
       .button-pill:hover svg,
       .button-pill:hover {
         color: rgba(255, 255, 255, 1) !important;
       }
+
       .nx-console:hover {
         background-color: rgba(0, 122, 204, 1);
       }
+
       .nx-console svg {
         color: rgba(0, 122, 204, 1);
       }
+
       .nx-console-jetbrains {
         margin-top: 2rem;
       }
+
       .nx-console-jetbrains:hover {
         background-color: rgba(255, 49, 140, 1);
       }
+
       .nx-console-jetbrains svg {
         color: rgba(255, 49, 140, 1);
       }
+
       #nx-repo:hover {
         background-color: rgba(24, 23, 23, 1);
       }
+
       #nx-repo svg {
         color: rgba(24, 23, 23, 1);
       }
+
       #nx-cloud {
         margin-bottom: 2rem;
         margin-top: 2rem;
         padding: 2.5rem 2rem;
       }
+
       #nx-cloud > div {
         align-items: center;
         display: flex;
       }
+
       #nx-cloud > div svg {
         border-radius: 0.375rem;
         flex-shrink: 0;
         width: 3rem;
       }
+
       #nx-cloud > div h2 {
         font-size: 1.125rem;
         font-weight: 400;
@@ -322,20 +372,24 @@ import { CommonModule } from '@angular/common';
         padding-left: 1rem;
         padding-right: 1rem;
       }
+
       #nx-cloud > div h2 span {
         display: block;
         font-size: 0.875rem;
         font-weight: 300;
         line-height: 1.25rem;
       }
+
       #nx-cloud p {
         font-size: 1rem;
         line-height: 1.5rem;
         margin-top: 1rem;
       }
+
       #nx-cloud pre {
         margin-top: 1rem;
       }
+
       #nx-cloud a {
         border-radius: 0.75rem;
         color: white;
@@ -351,6 +405,7 @@ import { CommonModule } from '@angular/common';
         padding: 2.5rem 2rem;
         margin-top: 3.5rem;
       }
+
       #commands h2 {
         font-size: 1.25rem;
         font-weight: 400;
@@ -359,6 +414,7 @@ import { CommonModule } from '@angular/common';
         padding-left: 1rem;
         padding-right: 1rem;
       }
+
       #commands p {
         font-size: 1rem;
         font-weight: 300;
@@ -367,6 +423,7 @@ import { CommonModule } from '@angular/common';
         padding-left: 1rem;
         padding-right: 1rem;
       }
+
       details {
         align-items: center;
         display: flex;
@@ -375,9 +432,11 @@ import { CommonModule } from '@angular/common';
         padding-right: 1rem;
         width: 100%;
       }
+
       details pre > span {
         color: rgba(181, 181, 181, 1);
       }
+
       summary {
         border-radius: 0.5rem;
         display: flex;
@@ -385,19 +444,22 @@ import { CommonModule } from '@angular/common';
         padding: 0.5rem;
         cursor: pointer;
         transition-property: background-color, border-color, color, fill, stroke,
-          opacity, box-shadow, transform, filter, backdrop-filter,
-          -webkit-backdrop-filter;
+        opacity, box-shadow, transform, filter, backdrop-filter,
+        -webkit-backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
       }
+
       summary:hover {
         background-color: rgba(243, 244, 246, 1);
       }
+
       summary svg {
         height: 1.5rem;
         margin-right: 1rem;
         width: 1.5rem;
       }
+
       #love {
         color: rgba(107, 114, 128, 1);
         font-size: 0.875rem;
@@ -406,6 +468,7 @@ import { CommonModule } from '@angular/common';
         opacity: 0.6;
         text-align: center;
       }
+
       #love svg {
         color: rgba(252, 165, 165, 1);
         width: 1.25rem;
@@ -413,13 +476,16 @@ import { CommonModule } from '@angular/common';
         display: inline;
         margin-top: -0.25rem;
       }
+
       @media screen and (min-width: 768px) {
         #hero {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
         #hero .logo-container {
           display: flex;
         }
+
         #middle-content {
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 4rem;
@@ -679,16 +745,16 @@ import { CommonModule } from '@angular/common';
                 viewBox="20 20 60 60"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="m22.5 22.5h60v60h-60z" />
+                <path d="m22.5 22.5h60v60h-60z"/>
                 <g fill="#fff">
-                  <path d="m29.03 71.25h22.5v3.75h-22.5z" />
+                  <path d="m29.03 71.25h22.5v3.75h-22.5z"/>
                   <path
                     d="m28.09 38 1.67-1.58a1.88 1.88 0 0 0 1.47.87c.64 0 1.06-.44 1.06-1.31v-5.98h2.58v6a3.48 3.48 0 0 1 -.87 2.6 3.56 3.56 0 0 1 -2.57.95 3.84 3.84 0 0 1 -3.34-1.55z"
                   />
                   <path
                     d="m36 30h7.53v2.19h-5v1.44h4.49v2h-4.42v1.49h5v2.21h-7.6z"
                   />
-                  <path d="m47.23 32.29h-2.8v-2.29h8.21v2.27h-2.81v7.1h-2.6z" />
+                  <path d="m47.23 32.29h-2.8v-2.29h8.21v2.27h-2.81v7.1h-2.6z"/>
                   <path
                     d="m29.13 43.08h4.42a3.53 3.53 0 0 1 2.55.83 2.09 2.09 0 0 1 .6 1.53 2.16 2.16 0 0 1 -1.44 2.09 2.27 2.27 0 0 1 1.86 2.29c0 1.61-1.31 2.59-3.55 2.59h-4.44zm5 2.89c0-.52-.42-.8-1.18-.8h-1.29v1.64h1.24c.79 0 1.25-.26 1.25-.81zm-.9 2.66h-1.57v1.73h1.62c.8 0 1.24-.31 1.24-.86 0-.5-.4-.87-1.27-.87z"
                   />
@@ -698,7 +764,7 @@ import { CommonModule } from '@angular/common';
                   <path
                     d="m49.59 43h2.5l4 9.44h-2.79l-.67-1.69h-3.63l-.67 1.69h-2.71zm2.27 5.73-1-2.65-1.06 2.65z"
                   />
-                  <path d="m56.46 43.05h2.6v9.37h-2.6z" />
+                  <path d="m56.46 43.05h2.6v9.37h-2.6z"/>
                   <path
                     d="m60.06 43.05h2.42l3.37 5v-5h2.57v9.37h-2.26l-3.53-5.14v5.14h-2.57z"
                   />
@@ -710,7 +776,7 @@ import { CommonModule } from '@angular/common';
               <span>
                 Install Nx Console for JetBrains
                 <span
-                  >Available for WebStorm, Intellij IDEA Ultimate and
+                >Available for WebStorm, Intellij IDEA Ultimate and
                   more!</span
                 >
               </span>
@@ -773,11 +839,11 @@ import { CommonModule } from '@angular/common';
               Build, test and lint your app
             </summary>
             <pre><span># Build</span>
-nx build 
+nx build
 <span># Test</span>
-nx test 
+nx test
 <span># Lint</span>
-nx lint 
+nx lint
 <span># Run them together!</span>
 nx run-many -t build test lint</pre>
           </details>
@@ -865,5 +931,6 @@ nx g &#64;nx/angular:component ui/src/lib/button</pre>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
+  standalone: true
 })
 export class NxWelcomeComponent {}
