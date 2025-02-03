@@ -1,2 +1,2 @@
 # WEBLAB_TechRadar
-[Projektbeschreinung](project_description.md)
+[Projektbeschreibung](docs/project_description.md)
