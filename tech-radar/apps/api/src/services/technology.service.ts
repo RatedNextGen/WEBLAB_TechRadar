@@ -5,6 +5,7 @@ import {
   TechnologyMaturity
 } from "../../../../shared/src/lib/models/technology.model";
 import {ValidationError} from "../utils/validationError";
+import {throwDuplicationError} from "../utils/errorHandler";
 
 export class TechnologyService {
   constructor(private technologyRepository: MongoTechnologyRepository) {}
@@ -22,25 +23,48 @@ export class TechnologyService {
   }
 
   async create(technology: TechnologyDTO): Promise<any> {
-    this.validateEnums(technology);
-    return this.technologyRepository.create(technology);
+    this.validateTechnology(technology);
+    return this.technologyRepository.create({
+      ...technology,
+      publishedAt: technology.published ? new Date() : null
+    });
   }
 
-  async update(id: string, technology: Omit<TechnologyDTO, "id">): Promise<any> {
-    this.validateEnums(technology);
-    return this.technologyRepository.update(id, technology);
+  async update(id: string, technology: Partial<TechnologyDTO>): Promise<any> {
+    this.validateTechnology(technology);
+
+    const existingTechAndName = await this.technologyRepository.findByNameAndCategory(
+      technology.name,
+      technology.category,
+      id
+    );
+    if (existingTechAndName) {
+      throwDuplicationError(technology);
+    }
+
+    const updateData = {
+      ...technology,
+      publishedAt: technology.publishedAt ?? (technology.published ? new Date() : null)
+    };
+
+    return this.technologyRepository.update(id, updateData);
   }
+
 
   async delete(id: string): Promise<any> {
     return this.technologyRepository.delete(id);
   }
 
-  private validateEnums(technology: any) {
+  private validateTechnology(technology: Partial<TechnologyDTO>) {
+    if (technology.published && (!technology.description || !technology.maturity)) {
+      throw new ValidationError("Description and maturity are required when publishing a technology.");
+    }
+
     if (technology.category && !Object.values(TechnologyCategory).includes(technology.category)) {
       throw new ValidationError(`Invalid category: "${technology.category}". Allowed values: ${Object.values(TechnologyCategory).join(", ")}`);
     }
 
-    if (technology.maturity && technology.maturity !== null && !Object.values(TechnologyMaturity).includes(technology.maturity)) {
+    if (technology.maturity && !Object.values(TechnologyMaturity).includes(technology.maturity)) {
       throw new ValidationError(`Invalid maturity: "${technology.maturity}". Allowed values: ${Object.values(TechnologyMaturity).join(", ")}`);
     }
   }

@@ -20,14 +20,17 @@ export class MongoTechnologyRepository implements TechnologyRepository {
     return TechnologyModel.findById(id);
   }
 
+  async findByNameAndCategory(name: string, category: string, excludeId?: string): Promise<TechnologyDTO | null> {
+    return TechnologyModel.findOne({
+      name,
+      category,
+      _id: { $ne: excludeId }
+    });
+  }
+
   async create(technology: TechnologyDTO): Promise<any> {
     try {
-      this.validateTechnology(technology);
-
-      return await TechnologyModel.create({
-        ...technology,
-        publishedAt: technology.published ? new Date() : null
-      });
+      return await TechnologyModel.create(technology);
     } catch (error: any) {
       this.handleMongoError(error, technology);
     }
@@ -35,32 +38,14 @@ export class MongoTechnologyRepository implements TechnologyRepository {
 
   async update(id: string, technology: any) {
     try {
-      this.validateTechnology(technology);
-
-      const existingTechAndName = await TechnologyModel.findOne({
-        name: technology.name,
-        category: technology.category,
-        _id: {$ne: id}
-      });
-      if (existingTechAndName) {
-        throwDuplicationError(technology);
-      }
-
-      const updateData = {
-        ...technology,
-        publishedAt: technology.publishedAt ?? (technology.published ? new Date() : null)
-      };
-
-      return TechnologyModel.findByIdAndUpdate(id, updateData, {new: true});
+      return await TechnologyModel.findByIdAndUpdate(id, technology, {new: true});
     } catch (error: any) {
       this.handleMongoError(error, technology);
     }
   }
 
-  private validateTechnology(technology: TechnologyDTO) {
-    if (technology.published && (!technology.description || !technology.maturity)) {
-      throw new ValidationError("Description and maturity are required when publishing a technology.");
-    }
+  async delete(id: string) {
+    return TechnologyModel.findByIdAndDelete(id);
   }
 
   private handleMongoError(error: any, technology: TechnologyDTO): never {
@@ -68,9 +53,5 @@ export class MongoTechnologyRepository implements TechnologyRepository {
       throwDuplicationError(technology);
     }
     throw error;
-  }
-
-  async delete(id: string) {
-    return TechnologyModel.findByIdAndDelete(id);
   }
 }
