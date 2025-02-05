@@ -47,7 +47,7 @@ export class TechnologyController {
       res.json(technology);
     } catch (error: any) {
       logger.error(error)
-      handleErrorResponse(res, {message: "Failed to update user"});
+      handleErrorResponse(res, error);
     }
   }
 
