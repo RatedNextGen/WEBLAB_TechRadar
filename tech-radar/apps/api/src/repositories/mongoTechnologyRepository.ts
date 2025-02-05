@@ -2,7 +2,6 @@ import {TechnologyModel} from "../config/database";
 import {TechnologyRepository} from "./technology.repository.interface";
 import {TechnologyDTO} from "../../../../shared/src/lib/models/technology.model";
 import {throwDuplicationError} from "../utils/errorHandler";
-import {ValidationError} from "../utils/validationError";
 
 
 const DUPLICATE_ENTRY = 11000;
