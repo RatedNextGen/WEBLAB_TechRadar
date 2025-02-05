@@ -1,0 +1,24 @@
+export enum TechnologyCategory {
+  Techniques = "Techniques",
+  Platforms = "Platforms",
+  Tools = "Tools",
+  LanguagesAndFrameworks = "Languages & Frameworks",
+}
+
+export enum TechnologyMaturity {
+  Assess = "Assess",
+  Trial = "Trial",
+  Adopt = "Adopt",
+  Hold = "Hold",
+}
+
+export interface TechnologyDTO {
+  id: string;
+  name: string;
+  category: TechnologyCategory;
+  maturity: TechnologyMaturity;
+  description: string;
+  publishedAt: Date;
+  readonly createdAt?: Date;
+  readonly updatedAt?: Date;
+}
