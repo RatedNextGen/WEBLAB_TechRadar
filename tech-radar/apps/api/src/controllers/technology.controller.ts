@@ -25,6 +25,7 @@ export class TechnologyController {
       }
       return res.json(technology);
     } catch (error: any) {
+      console.error(error)
       handleErrorResponse(res, {message: "Failed retrieve user"});
     }
   }
@@ -34,7 +35,8 @@ export class TechnologyController {
       const technology = await this.technologyService.create(req.body);
       res.status(201).json(technology);
     } catch (error: any) {
-      handleErrorResponse(res, {message: "Failed to create user"});
+      console.error(error)
+      handleErrorResponse(res, error);
     }
   }
 
@@ -43,6 +45,7 @@ export class TechnologyController {
       const technology = await this.technologyService.update(req.params.id, req.body);
       res.json(technology);
     } catch (error: any) {
+      console.error(error)
       handleErrorResponse(res, {message: "Failed to update user"});
     }
   }
