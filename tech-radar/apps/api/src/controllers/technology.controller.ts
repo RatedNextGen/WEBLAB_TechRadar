@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 import {TechnologyService} from "../services/technology.service";
 import {MongoTechnologyRepository} from "../repositories/mongoTechnologyRepository";
 import {handleDeleteResponse, handleErrorResponse, handleItemNotFoundResponse} from "../utils/errorHandler";
+import logger from "../utils/logger";
 
 export class TechnologyController {
   technologyService = new TechnologyService(new MongoTechnologyRepository());
@@ -25,7 +26,7 @@ export class TechnologyController {
       }
       return res.json(technology);
     } catch (error: any) {
-      console.error(error)
+      logger.error(error);
       handleErrorResponse(res, {message: "Failed retrieve user"});
     }
   }
@@ -35,7 +36,7 @@ export class TechnologyController {
       const technology = await this.technologyService.create(req.body);
       res.status(201).json(technology);
     } catch (error: any) {
-      console.error(error)
+      logger.error(error);
       handleErrorResponse(res, error);
     }
   }
@@ -45,7 +46,7 @@ export class TechnologyController {
       const technology = await this.technologyService.update(req.params.id, req.body);
       res.json(technology);
     } catch (error: any) {
-      console.error(error)
+      logger.error(error)
       handleErrorResponse(res, {message: "Failed to update user"});
     }
   }
@@ -55,7 +56,7 @@ export class TechnologyController {
       const deletedItem = await this.technologyService.delete(req.params.id);
       handleDeleteResponse(res, deletedItem);
     } catch (error: any) {
-      console.log(error.message);
+      logger.error(error);
       handleErrorResponse(res, {message: "Failed to delete user"});
     }
   }
