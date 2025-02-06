@@ -1,11 +1,15 @@
 import { generateToken } from '../../utils/jwt';
 import { UserRepository } from '../../repositories/user/user.repository.interface';
+import { LoginLogService } from '../loginLog/loginLog.service';
 
 export class UserService {
   private userRepository: UserRepository;
+  private loginLogService: LoginLogService;
 
-  constructor(userReposistory: UserRepository) {
+  constructor(userReposistory: UserRepository, loginLogService: LoginLogService) {
     this.userRepository = userReposistory;
+    this.loginLogService = loginLogService;
+
   }
 
   async login(email: string, password: string) {
@@ -18,6 +22,7 @@ export class UserService {
     if (!isMatch) {
       throw new Error("Invalid email or password.");
     }
+    await this.loginLogService.logLogin(user.email, user.role);
 
     const token = generateToken({ email: user.email, role: user.role });
     return { token };

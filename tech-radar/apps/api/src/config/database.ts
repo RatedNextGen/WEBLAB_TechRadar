@@ -15,7 +15,10 @@ export const connectDB = async () => {
   }
 };
 
-
+/**
+ * This function is only here so that consistency of the users can be ensured at all times
+ * REMOVE it when going to production!
+ */
 const resetUsers = async () => {
   try {
     logger.info("Drop all users");
