@@ -12,7 +12,7 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
 
   try {
     // @ts-ignore
-    req.user = verifyToken(token); // ⬅️ Speichern der User-Daten im Request
+    req.user = verifyToken(token);
     next();
   } catch (error) {
     return res.status(403).json({ message: "Invalid or expired token." });
