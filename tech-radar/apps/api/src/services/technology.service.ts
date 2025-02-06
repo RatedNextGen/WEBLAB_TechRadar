@@ -26,7 +26,17 @@ export class TechnologyService {
     this.validateTechnology(technology);
     return this.technologyRepository.create({
       ...technology,
-      publishedAt: technology.published ? new Date() : null
+      published: true,
+      publishedAt: new Date()
+    });
+  }
+
+  async createDraft(technology: TechnologyDTO): Promise<any> {
+    this.validateTechnology(technology);
+    return this.technologyRepository.create({
+      ...technology,
+      published: false,
+      publishedAt: null
     });
   }
 

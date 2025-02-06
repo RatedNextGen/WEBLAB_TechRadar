@@ -41,6 +41,16 @@ export class TechnologyController {
     }
   }
 
+  async createDraft(req: Request, res: Response) {
+    try {
+      const technology = await this.technologyService.createDraft(req.body);
+      res.status(201).json(technology);
+    } catch (error: any) {
+      logger.error(error);
+      handleErrorResponse(res, error);
+    }
+  }
+
   async update(req: Request, res: Response) {
     try {
       const technology = await this.technologyService.update(req.params.id, req.body);
