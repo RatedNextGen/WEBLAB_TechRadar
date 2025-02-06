@@ -1,20 +1,25 @@
-import {Request, Response} from "express";
-import {TechnologyService} from "../services/technology.service";
-import {MongoTechnologyRepository} from "../repositories/mongoTechnologyRepository";
-import {handleDeleteResponse, handleErrorResponse, handleItemNotFoundResponse} from "../utils/errorHandler";
+import { Request, Response } from "express";
+import { TechnologyService } from "../services/technology.service";
+import { MongoTechnologyRepository } from "../repositories/mongoTechnologyRepository";
+import { handleDeleteResponse, handleErrorResponse, handleItemNotFoundResponse } from "../utils/errorHandler";
 import logger from "../utils/logger";
 
 export class TechnologyController {
   technologyService = new TechnologyService(new MongoTechnologyRepository());
 
   async getAllPublished(req: Request, res: Response) {
-    // TODO add authorization
-    const userRole = "user"
-    // @ts-ignore
-    if (userRole === "admin") {
-      return res.json(await this.technologyService.getAllForAdmin());
-    } else {
-      return res.json(await this.technologyService.getAllForUsers());
+    try {
+      // @ts-ignore
+      const userRole = req.user?.role;
+
+      if (["CTO", "Tech-Lead"].includes(userRole)) {
+        return res.json(await this.technologyService.getAllForAdmin());
+      } else {
+        return res.json(await this.technologyService.getAllForUsers());
+      }
+    } catch (error: any) {
+      logger.error(error);
+      handleErrorResponse(res, error);
     }
   }
 
@@ -27,7 +32,7 @@ export class TechnologyController {
       return res.json(technology);
     } catch (error: any) {
       logger.error(error);
-      handleErrorResponse(res, {message: "Failed retrieve user"});
+      handleErrorResponse(res, { message: "Failed to retrieve technology" });
     }
   }
 
@@ -56,7 +61,7 @@ export class TechnologyController {
       const technology = await this.technologyService.update(req.params.id, req.body);
       res.json(technology);
     } catch (error: any) {
-      logger.error(error)
+      logger.error(error);
       handleErrorResponse(res, error);
     }
   }
@@ -67,7 +72,7 @@ export class TechnologyController {
       handleDeleteResponse(res, deletedItem);
     } catch (error: any) {
       logger.error(error);
-      handleErrorResponse(res, {message: "Failed to delete user"});
+      handleErrorResponse(res, { message: "Failed to delete technology" });
     }
   }
 }
