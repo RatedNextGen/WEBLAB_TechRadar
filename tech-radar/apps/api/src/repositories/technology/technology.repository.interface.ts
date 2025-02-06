@@ -1,4 +1,4 @@
-import {TechnologyDTO} from "../../../../shared/src/lib/models/technology.model";
+import {TechnologyDTO} from "../../../../../shared/src/lib/models/technology.model";
 
 export interface TechnologyRepository {
   getAllForAdmin(): Promise<TechnologyDTO[]>;

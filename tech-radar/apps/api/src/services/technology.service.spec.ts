@@ -1,5 +1,5 @@
 import {TechnologyService} from "./technology.service";
-import {MongoTechnologyRepository} from "../repositories/mongoTechnologyRepository";
+import {MongoTechnologyRepository} from "../repositories/technology/mongoTechnologyRepository";
 import {
   TechnologyDTO,
   TechnologyCategory,

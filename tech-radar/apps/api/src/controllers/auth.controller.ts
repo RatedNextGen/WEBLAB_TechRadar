@@ -1,21 +1,20 @@
 import { Request, Response } from "express";
-import { generateToken } from "../utils/jwt";
-import {users} from "../services/user.service";
+import { UserService } from "../services/user.service";
+import { MongoUserRepository } from '../repositories/user/mongoUserRepository';
 
-export const login = (req: Request, res: Response) => {
+const userService = new UserService(new MongoUserRepository());
+
+export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required." });
   }
 
-  const user = users.find(u => u.email === email && u.password === password);
-
-  if (!user) {
-    return res.status(401).json({ message: "Invalid email or password." });
+  try {
+    const result = await userService.login(email, password);
+    res.json(result);
+  } catch (error: any) {
+    res.status(401).json({ message: error.message || "Authentication failed." });
   }
-
-  const token = generateToken({ email: user.email, role: user.role });
-
-  res.json({ token });
 };

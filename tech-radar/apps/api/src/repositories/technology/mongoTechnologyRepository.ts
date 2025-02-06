@@ -1,7 +1,7 @@
-import {TechnologyModel} from "../config/database";
 import {TechnologyRepository} from "./technology.repository.interface";
-import {TechnologyDTO} from "../../../../shared/src/lib/models/technology.model";
-import {throwDuplicationError} from "../utils/errorHandler";
+import {TechnologyDTO} from "../../../../../shared/src/lib/models/technology.model";
+import {throwDuplicationError} from "../../utils/errorHandler";
+import { TechnologyModel } from '../../config/technology.schema';
 
 
 const DUPLICATE_ENTRY = 11000;
