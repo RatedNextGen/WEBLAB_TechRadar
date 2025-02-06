@@ -1,11 +1,11 @@
 import {TechnologyService} from "./technology.service";
-import {MongoTechnologyRepository} from "../repositories/technology/mongoTechnologyRepository";
+import {MongoTechnologyRepository} from "../../repositories/technology/mongoTechnologyRepository";
 import {
   TechnologyDTO,
   TechnologyCategory,
   TechnologyMaturity
-} from "../../../../shared/src/lib/models/technology.model";
-import {ValidationError} from "../utils/validationError";
+} from "../../../../../shared/src/lib/models/technology.model";
+import {ValidationError} from "../../utils/validationError";
 
 const mockRepository = {
   getAllForAdmin: jest.fn(),

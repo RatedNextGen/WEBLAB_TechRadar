@@ -1,11 +1,11 @@
-import {MongoTechnologyRepository} from "../repositories/technology/mongoTechnologyRepository";
+import {MongoTechnologyRepository} from "../../repositories/technology/mongoTechnologyRepository";
 import {
   TechnologyCategory,
   TechnologyDTO,
   TechnologyMaturity
-} from "../../../../shared/src/lib/models/technology.model";
-import {ValidationError} from "../utils/validationError";
-import {throwDuplicationError} from "../utils/errorHandler";
+} from "../../../../../shared/src/lib/models/technology.model";
+import {ValidationError} from "../../utils/validationError";
+import {throwDuplicationError} from "../../utils/errorHandler";
 
 export class TechnologyService {
   constructor(private technologyRepository: MongoTechnologyRepository) {}

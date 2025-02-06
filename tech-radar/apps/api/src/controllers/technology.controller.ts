@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { TechnologyService } from "../services/technology.service";
+import { TechnologyService } from "../services/technology/technology.service";
 import { MongoTechnologyRepository } from "../repositories/technology/mongoTechnologyRepository";
 import { handleDeleteResponse, handleErrorResponse, handleItemNotFoundResponse } from "../utils/errorHandler";
 import logger from "../utils/logger";

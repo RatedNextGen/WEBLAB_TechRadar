@@ -1,5 +1,5 @@
-import { generateToken } from '../utils/jwt';
-import { UserRepository } from '../repositories/user/user.repository.interface';
+import { generateToken } from '../../utils/jwt';
+import { UserRepository } from '../../repositories/user/user.repository.interface';
 
 export class UserService {
   private userRepository: UserRepository;
