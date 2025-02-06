@@ -14,3 +14,29 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
+
+
+const resetUsers = async () => {
+  try {
+    logger.info("Drop all users");
+    await UserModel.deleteMany({});
+
+    const users = [
+      { email: "cto@hslu.ch", password: "cto123", role: UserRole.CTO },
+      { email: "techlead@hslu.ch", password: "techlead123", role: UserRole.TECH_LEAD },
+      { email: "employee@hslu.ch", password: "employee123", role: UserRole.EMPLOYEE }
+    ];
+
+    const hashedUsers = await Promise.all(
+      users.map(async (user) => ({
+        ...user,
+        password: await bcrypt.hash(user.password, 1024)
+      }))
+    );
+
+    await UserModel.insertMany(hashedUsers);
+    logger.info("Users added successfully");
+  } catch (error) {
+    logger.error(`Error adding users ${error}`);
+  }
+};
