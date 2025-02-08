@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { TechnologyDTO } from '../../../../../shared/src/lib/models/technology.model';
+import { baseUrl } from '../pages/utils/constants';
 
 
-const baseUrl = 'http://localhost:8080/api';
 
 @Injectable({
   providedIn: 'root'

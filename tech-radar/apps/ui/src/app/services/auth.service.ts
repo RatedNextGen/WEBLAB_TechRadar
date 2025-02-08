@@ -3,9 +3,9 @@ import { Observable, of, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { UserRole } from '../../../../../shared/src/lib/models/user.model';
+import { baseUrl } from '../pages/utils/constants';
 
 
-const baseUrl = 'http://localhost:8080/api';
 
 @Injectable({
   providedIn: 'root'
