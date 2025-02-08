@@ -130,10 +130,46 @@ describe("TechnologyService", () => {
     mockRepository.findByNameAndCategory.mockResolvedValue(null);
     mockRepository.update.mockResolvedValue(updatedTech);
 
-    const result = await technologyService.update("123", updatedTech);
+    const result = await technologyService.updateDraft("123", updatedTech);
 
     expect(result).toEqual(updatedTech);
     expect(mockRepository.update).toHaveBeenCalledTimes(1);
+  });
+
+  it("should update a draft technology", async () => {
+    const draftUpdate = {
+      name: "Updated Draft",
+      category: TechnologyCategory.Tools,
+      description: "Draft update",
+      published: false,
+    };
+
+    mockRepository.getById.mockResolvedValue({ published: false });
+    mockRepository.update.mockResolvedValue(draftUpdate);
+
+    const result = await technologyService.updateDraft("456", draftUpdate);
+
+    expect(result).toEqual(draftUpdate);
+    expect(mockRepository.update).toHaveBeenCalledWith("456", expect.objectContaining({
+      name: "Updated Draft",
+      published: false,
+    }));
+  });
+
+  it("should throw ValidationError when trying to update a published technology with updateDraft()", async () => {
+    mockRepository.getById.mockResolvedValue({ published: true });
+
+    await expect(technologyService.updateDraft("456", { name: "Invalid Draft Update" }))
+      .rejects
+      .toThrow(ValidationError);
+  });
+
+  it("should throw ValidationError when trying to update a draft with update function", async () => {
+    mockRepository.getById.mockResolvedValue({ published: false });
+
+    await expect(technologyService.update("123", { name: "Invalid Update" }))
+      .rejects
+      .toThrow(ValidationError);
   });
 
   it("should delete a technology", async () => {

@@ -11,6 +11,7 @@ router.get("/technologies/:id", authenticateJWT, technologyController.getById.bi
 router.post("/technologies/", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.create.bind(technologyController));
 router.post("/technologies/draft", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.createDraft.bind(technologyController));
 router.put("/technologies/:id", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.update.bind(technologyController));
+router.put("/technologies/draft/:id", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.updateDraft.bind(technologyController));
 router.delete("/technologies/:id", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.delete.bind(technologyController));
 
 export default router;

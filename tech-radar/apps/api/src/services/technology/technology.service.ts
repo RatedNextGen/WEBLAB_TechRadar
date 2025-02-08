@@ -41,6 +41,11 @@ export class TechnologyService {
   }
 
   async update(id: string, technology: Partial<TechnologyDTO>): Promise<any> {
+    const existingTechnology = await this.technologyRepository.getById(id);
+    if (!existingTechnology?.published) {
+      throw new ValidationError("Cannot update an unpublished draft using update(). Use updateDraft() instead.");
+    }
+
     this.validateTechnology(technology);
 
     const existingTechAndName = await this.technologyRepository.findByNameAndCategory(
@@ -52,12 +57,22 @@ export class TechnologyService {
       throwDuplicationError(technology);
     }
 
-    const updateData = {
-      ...technology,
-      publishedAt: technology.publishedAt ?? (technology.published ? new Date() : null)
-    };
+    return this.technologyRepository.update(id, { ...technology });
+  }
 
-    return this.technologyRepository.update(id, updateData);
+  async updateDraft(id: string, technology: Partial<TechnologyDTO>): Promise<any> {
+    const existingTechnology = await this.technologyRepository.getById(id);
+    if (existingTechnology?.published) {
+      throw new ValidationError("Cannot update a published technology using updateDraft. Use update instead.");
+    }
+
+    this.validateTechnology(technology);
+
+    return this.technologyRepository.update(id, {
+      ...technology,
+      published: false,
+      publishedAt: null
+    });
   }
 
 

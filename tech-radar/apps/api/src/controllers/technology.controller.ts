@@ -66,6 +66,16 @@ export class TechnologyController {
     }
   }
 
+  async updateDraft(req: Request, res: Response) {
+    try {
+      const technology = await this.technologyService.updateDraft(req.params.id, req.body);
+      res.json(technology);
+    } catch (error: any) {
+      logger.error(error);
+      handleErrorResponse(res, error);
+    }
+  }
+
   async delete(req: Request, res: Response) {
     try {
       const deletedItem = await this.technologyService.delete(req.params.id);
