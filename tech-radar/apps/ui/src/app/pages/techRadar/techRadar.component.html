@@ -1,4 +1,8 @@
-<p>techRadar works!</p>
+<button [routerLink]="'logout'">Logout</button>
 @if (userRole !== UserRole.EMPLOYEE){
   <p>Hallo {{userRole}}</p>
+  <app-technology-create></app-technology-create>
 }
+
+<app-radar-viewer></app-radar-viewer>
+

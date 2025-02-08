@@ -1,0 +1,51 @@
+<div class="form-container">
+  <h2>Create New Technology</h2>
+
+  <form [formGroup]="technologyForm">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" required />
+      <div *ngIf="technologyForm.get('name')?.invalid && technologyForm.get('name')?.touched">
+        <small *ngIf="technologyForm.get('name')?.errors?.['required']">Name is required.</small>
+        <small *ngIf="technologyForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="category">Category:</label>
+      <select id="category" formControlName="category" required>
+        <option value="">Select a category</option>
+        <option value="Languages & Frameworks">Languages & Frameworks</option>
+        <option value="Platforms">Platforms</option>
+        <option value="Tools">Tools</option>
+        <option value="Techniques">Techniques</option>
+      </select>
+      <div *ngIf="technologyForm.get('category')?.invalid && technologyForm.get('category')?.touched">
+        <small>Category is required.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <div>
+      <label for="maturity">Maturity:</label>
+      <select id="maturity" formControlName="maturity">
+        <option value="">Select maturity</option>
+        <option value="Assess">Assess</option>
+        <option value="Trial">Trial</option>
+        <option value="Adopt">Adopt</option>
+        <option value="Hold">Hold</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="technologyForm.invalid" (click)="onCreateAndPublish()">Save and Publish Technology</button>
+    <button type="submit" [disabled]="technologyForm.invalid" (click)="onCreateAndDraft()">Save Draft Technology</button>
+  </form>
+
+  <!-- ✅ Success & Error Messages -->
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+</div>
