@@ -1,21 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  imports: [CommonModule, FormsModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  selector: 'app-logout',
+  imports: [CommonModule],
+  template: `<p>Logging out...</p>`,
   standalone: true
 })
-export class HomeComponent {
+export class LogoutComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  logout(): void {
+  ngOnInit(): void {
     this.authService.logout().subscribe({
       next: () => this.router.navigate(['/login']),
       error: () => alert('Error logging out')

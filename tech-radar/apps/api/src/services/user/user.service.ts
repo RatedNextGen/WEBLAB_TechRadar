@@ -24,7 +24,6 @@ export class UserService {
     }
     await this.loginLogService.logLogin(user.email, user.role);
 
-    const token = generateToken({ email: user.email, role: user.role });
-    return { token };
+    return generateToken({ email: user.email, role: user.role }) ;
   }
 }

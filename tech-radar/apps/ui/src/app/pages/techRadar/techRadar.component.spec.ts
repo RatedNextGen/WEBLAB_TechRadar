@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeComponent } from './home.component';
+import { TechRadarComponent } from './techRadar.component';
 
-describe('LoginComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('TechRadarComponent', () => {
+  let component: TechRadarComponent;
+  let fixture: ComponentFixture<TechRadarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent],
+      imports: [TechRadarComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(TechRadarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

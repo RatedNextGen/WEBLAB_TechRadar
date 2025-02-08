@@ -1,10 +1,10 @@
 {
-  "name": "tech-radar-e2e",
+  "name": "ui-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/tech-radar-e2e/src",
+  "sourceRoot": "apps/ui-e2e/src",
   "tags": [],
-  "implicitDependencies": ["tech-radar"],
-  "// targets": "to see all targets run: nx show project tech-radar-e2e --web",
+  "implicitDependencies": ["ui"],
+  "// targets": "to see all targets run: nx show project ui-e2e --web",
   "targets": {}
 }

@@ -7,9 +7,7 @@ import { LoginLogService } from '../services/loginLog/loginLog.service';
 const loginService = new LoginLogService(new MongoLoginLogRepository());
 const userService = new UserService(new MongoUserRepository(), loginService);
 
-function getMaxAge() {
-  return 3600000;
-}
+const ONE_HOUR = 3600000;
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -23,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
       httpOnly: true,
       secure: false,
       sameSite: 'strict',
-      maxAge: getMaxAge()
+      maxAge: ONE_HOUR
     });
     res.json({ message: 'Logged in successfully' });
   } catch (error: any) {
