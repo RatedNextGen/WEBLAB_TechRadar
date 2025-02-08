@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="NxAngularConfigService" workspaceLocation="file://$PROJECT_DIR$/tech-radar/nx.json">
-    <projects>
-      <project name="api" file="file://$PROJECT_DIR$/tech-radar/apps/api/project.json" />
-      <project name="api-e2e" file="file://$PROJECT_DIR$/tech-radar/apps/api-e2e/project.json" />
-      <project name="shared" file="file://$PROJECT_DIR$/tech-radar/shared/project.json" />
-      <project name="tech-radar-e2e" file="file://$PROJECT_DIR$/tech-radar/apps/ui-e2e/project.json" />
-      <project name="ui" file="file://$PROJECT_DIR$/tech-radar/apps/ui/project.json" />
-    </projects>
-  </component>
+  <component name="NxAngularConfigService" workspaceLocation="file://$PROJECT_DIR$/tech-radar/nx.json" />
 </project>

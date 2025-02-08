@@ -1,14 +1,11 @@
-import {NextFunction, Request, Response} from "express";
-import {verifyToken} from "../utils/jwt";
+import { NextFunction, Request, Response } from 'express';
+import { verifyToken } from '../utils/jwt';
 
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  const { token } = req.cookies.techRadar;
+  if (!token) {
     return res.status(401).json({ message: "Authentication required." });
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     // @ts-ignore
