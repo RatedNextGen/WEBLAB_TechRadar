@@ -26,7 +26,7 @@ export class TechnologyService {
     return this.http.post<TechnologyDTO>(`${baseUrl}/technologies/draft`, technology, { withCredentials: true }).pipe(
       tap((createdTech) => {
         const updatedTechnologies = [...this.technologiesSubject.getValue(), createdTech];
-        this.technologiesSubject.next(updatedTechnologies); // ✅ Add the new technology
+        this.technologiesSubject.next(updatedTechnologies);
       })
     );
   }
@@ -35,7 +35,7 @@ export class TechnologyService {
     return this.http.post<TechnologyDTO>(`${baseUrl}/technologies`, technology, { withCredentials: true }).pipe(
       tap((createdTech) => {
         const updatedTechnologies = [...this.technologiesSubject.getValue(), createdTech];
-        this.technologiesSubject.next(updatedTechnologies); // ✅ Add the new technology
+        this.technologiesSubject.next(updatedTechnologies);
       })
     );
   }
@@ -45,8 +45,8 @@ export class TechnologyService {
       tap(() => {
         const updatedTechnologies = this.technologiesSubject
           .getValue()
-          .filter(tech => tech._id !== technologyId); // ✅ Remove the deleted item
-        this.technologiesSubject.next(updatedTechnologies); // ✅ Update the observable
+          .filter(tech => tech._id !== technologyId);
+        this.technologiesSubject.next(updatedTechnologies);
       })
     );
   }
