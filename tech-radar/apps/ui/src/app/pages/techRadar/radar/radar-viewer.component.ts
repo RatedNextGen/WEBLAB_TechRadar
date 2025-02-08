@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyService } from '../../../services/technology.service';
 import { TechnologyDTO } from '../../../../../../../shared/src/lib/models/technology.model';
@@ -11,13 +11,23 @@ import { Observable } from 'rxjs';
   styleUrl: './radar-viewer.component.scss',
   standalone: true
 })
-export class RadarViewerComponent implements OnInit{
-  technologies$!: Observable<TechnologyDTO[]>
-  constructor(private technologyService: TechnologyService) {}
+export class RadarViewerComponent implements OnInit {
+  @Input() canAdministrate: boolean = false;
+  technologies$!: Observable<TechnologyDTO[]>;
+
+  constructor(private technologyService: TechnologyService) {
+  }
 
   ngOnInit(): void {
-      this.technologies$ = this.technologyService.getAllTechnologies();
+    this.technologyService.getAllTechnologies().subscribe();
+    this.technologies$ = this.technologyService.technologies$;
+  }
+
+  onDelete(technologyId: string | undefined) {
+    if (technologyId) {
+      this.technologyService.deleteTechnology(technologyId).subscribe();
     }
+  }
 
 }
 

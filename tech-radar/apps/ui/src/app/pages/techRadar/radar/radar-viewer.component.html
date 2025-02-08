@@ -1,16 +1,19 @@
 <div>
   @if (technologies$ | async; as technologies) {
     <h2>Technologies List</h2>
-    @for (tech of technologies; track tech.name){
+    @for (tech of technologies; track tech.name) {
       <div>
         <ul>
-          <li>Name {{tech.name}}</li>
-          <li>Category {{tech.category}}</li>
-          <li>Maturity {{tech.maturity}}</li>
-          <li>Description {{tech.description}}</li>
-          <li>Published {{tech.published}}</li>
+          <li>Name {{ tech.name }}</li>
+          <li>Category {{ tech.category }}</li>
+          <li>Maturity {{ tech.maturity }}</li>
+          <li>Description {{ tech.description }}</li>
+          <li>Published {{ tech.published }}</li>
         </ul>
       </div>
+      @if (canAdministrate) {
+        <button (click)="onDelete(tech._id)">Delete</button>
+      }
     }
   } @else {
     <p>Loading technologies...</p>

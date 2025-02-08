@@ -13,7 +13,7 @@ export enum TechnologyMaturity {
 }
 
 export interface TechnologyDTO {
-  id?: string;
+  _id?: string;
   name: string;
   category: TechnologyCategory;
   maturity: TechnologyMaturity;

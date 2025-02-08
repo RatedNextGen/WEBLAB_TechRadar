@@ -1,8 +1,9 @@
 <button [routerLink]="'logout'">Logout</button>
-@if (userRole !== UserRole.EMPLOYEE){
-  <p>Hallo {{userRole}}</p>
+<p>Hallo {{userRole}}</p>
+@let canAdministrate = userRole !== UserRole.EMPLOYEE;
+@if (canAdministrate){
   <app-technology-create></app-technology-create>
 }
 
-<app-radar-viewer></app-radar-viewer>
+<app-radar-viewer [canAdministrate]="canAdministrate"></app-radar-viewer>
 
