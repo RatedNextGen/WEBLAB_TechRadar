@@ -3,12 +3,15 @@ import logger from '../utils/logger';
 import { UserModel } from './user.schema';
 import { UserRole } from '../../../../shared/src/lib/models/user.model';
 import bcrypt from 'bcrypt';
+import { TechnologyModel } from './technology.schema';
+import { getSampleTechnologies } from './getSampleTechnologies';
 
 export const connectDB = async () => {
   try {
     await mongoose.connect('mongodb://localhost:27017/technologyRadar');
     logger.info('MongoDB connected successfully!');
     await resetUsers();
+    await resetTechnologies();
   } catch (error) {
     logger.error(`MongoDB connection error: ${error}`);
     process.exit(1);
@@ -41,5 +44,23 @@ const resetUsers = async () => {
     logger.info("Users added successfully");
   } catch (error) {
     logger.error(`Error adding users ${error}`);
+  }
+};
+
+/**
+ * This function is only here so that there is a baseline of technologies present
+ * REMOVE it when going to production!
+ */
+const resetTechnologies = async () => {
+  try {
+    logger.info("Drop all technologies");
+    await TechnologyModel.deleteMany({});
+
+    const technologies = getSampleTechnologies();
+
+    await TechnologyModel.insertMany(technologies);
+    logger.info("Technology added successfully");
+  } catch (error) {
+    logger.error(`Error adding technologies ${error}`);
   }
 };
