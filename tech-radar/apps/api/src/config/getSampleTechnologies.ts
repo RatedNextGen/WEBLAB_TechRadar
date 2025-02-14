@@ -4,6 +4,7 @@ import {
   TechnologyMaturity
 } from '../../../../shared/src/lib/models/technology.model';
 
+// generated technologies sourced from chatgpt
 export function getSampleTechnologies(): TechnologyDTO[] {
   return [
     {
@@ -11,16 +12,16 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Techniques,
       maturity: TechnologyMaturity.Adopt,
       description: 'Adopt a service-oriented architecture with independently deployable services.',
-      publishedAt: new Date('2023-01-01'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'Domain-Driven Design',
       category: TechnologyCategory.Techniques,
       maturity: TechnologyMaturity.Adopt,
       description: 'Align your software design with business strategy using DDD.',
-      publishedAt: new Date('2023-01-02'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'Event-Driven Architecture',
@@ -127,8 +128,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Techniques,
       maturity: TechnologyMaturity.Hold,
       description: 'Time-consuming review processes that are prone to human error.',
-      publishedAt: new Date('2023-03-05'),
-      published: true
+      publishedAt: null,
+      published: false
     },
 
     // --- Techniques - Trial
@@ -153,8 +154,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Techniques,
       maturity: TechnologyMaturity.Trial,
       description: 'Evaluate blockchain technology for secure, decentralized business processes.',
-      publishedAt: new Date('2023-04-03'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'Low-Code Development',
@@ -195,8 +196,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Platforms,
       maturity: TechnologyMaturity.Adopt,
       description: 'Google Cloud provides scalable and reliable cloud computing services.',
-      publishedAt: new Date('2023-05-03'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'IBM Cloud',
@@ -245,8 +246,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Platforms,
       maturity: TechnologyMaturity.Assess,
       description: 'Offering simplified cloud infrastructure with a focus on developers.',
-      publishedAt: new Date('2023-06-04'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'Vultr',
@@ -321,8 +322,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Platforms,
       maturity: TechnologyMaturity.Trial,
       description: 'Manage hybrid and multi-cloud environments with Anthos.',
-      publishedAt: new Date('2023-08-03'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'AWS Outposts',
@@ -397,8 +398,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Tools,
       maturity: TechnologyMaturity.Assess,
       description: 'A powerful automation and configuration management tool.',
-      publishedAt: new Date('2023-10-02'),
-      published: true
+      publishedAt: null,
+      published: false
     },
     {
       name: 'Prometheus',

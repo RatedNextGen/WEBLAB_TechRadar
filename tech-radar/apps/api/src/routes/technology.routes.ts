@@ -12,6 +12,7 @@ router.post("/technologies/", authenticateJWT, authorizeRoles(UserRole.CTO, User
 router.post("/technologies/draft", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.createDraft.bind(technologyController));
 router.put("/technologies/:id", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.update.bind(technologyController));
 router.put("/technologies/draft/:id", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.updateDraft.bind(technologyController));
+router.put("/technologies/draft/:id/publish", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.updateDraftAndPublish.bind(technologyController));
 router.delete("/technologies/:id", authenticateJWT, authorizeRoles(UserRole.CTO, UserRole.TECH_LEAD), technologyController.delete.bind(technologyController));
 
 export default router;

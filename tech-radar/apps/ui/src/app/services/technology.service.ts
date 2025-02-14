@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
 import { TechnologyDTO } from '../../../../../shared/src/lib/models/technology.model';
 import { baseUrl } from '../pages/utils/constants';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +20,7 @@ export class TechnologyService {
   }
 
 
-  createDraftTechnology(technology: TechnologyDTO): Observable<TechnologyDTO> {
+  createDraft(technology: TechnologyDTO): Observable<TechnologyDTO> {
     return this.http.post<TechnologyDTO>(`${baseUrl}/technologies/draft`, technology, { withCredentials: true }).pipe(
       tap((createdTech) => {
         const updatedTechnologies = [...this.technologiesSubject.getValue(), createdTech];
@@ -31,12 +29,42 @@ export class TechnologyService {
     );
   }
 
-  createAndPublishTechnology(technology: TechnologyDTO): Observable<TechnologyDTO> {
+  create(technology: TechnologyDTO): Observable<TechnologyDTO> {
     return this.http.post<TechnologyDTO>(`${baseUrl}/technologies`, technology, { withCredentials: true }).pipe(
       tap((createdTech) => {
         const updatedTechnologies = [...this.technologiesSubject.getValue(), createdTech];
         this.technologiesSubject.next(updatedTechnologies);
       })
+    );
+  }
+
+  updateDraft(technology: TechnologyDTO): Observable<TechnologyDTO> {
+    return this.http.put<TechnologyDTO>(
+      `${baseUrl}/technologies/draft/${technology._id}`,
+      technology,
+      { withCredentials: true }
+    ).pipe(
+      tap(updatedTech => this.updateTechnologyInSubject(updatedTech))
+    );
+  }
+
+  updateDraftAndPublish(technology: TechnologyDTO): Observable<TechnologyDTO> {
+    return this.http.put<TechnologyDTO>(
+      `${baseUrl}/technologies/draft/${technology._id}/publish`,
+      technology,
+      { withCredentials: true }
+    ).pipe(
+      tap(updatedTech => this.updateTechnologyInSubject(updatedTech))
+    );
+  }
+
+  update(technology: TechnologyDTO): Observable<TechnologyDTO> {
+    return this.http.put<TechnologyDTO>(
+      `${baseUrl}/technologies/${technology._id}`,
+      technology,
+      { withCredentials: true }
+    ).pipe(
+      tap(updatedTech => this.updateTechnologyInSubject(updatedTech))
     );
   }
 
@@ -49,5 +77,16 @@ export class TechnologyService {
         this.technologiesSubject.next(updatedTechnologies);
       })
     );
+  }
+
+  private updateTechnologyInSubject(updatedTech: TechnologyDTO): void {
+    const currentTechs = this.technologiesSubject.getValue();
+    const index = currentTechs.findIndex(tech => tech._id === updatedTech._id);
+    if (index !== -1) {
+      currentTechs[index] = updatedTech;
+    } else {
+      currentTechs.push(updatedTech);
+    }
+    this.technologiesSubject.next([...currentTechs]);
   }
 }

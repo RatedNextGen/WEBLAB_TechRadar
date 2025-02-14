@@ -1,0 +1,36 @@
+.technologies-container {
+  padding: 1rem;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  .tech-item-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .draft-title {
+    color: red;
+  }
+
+}
+
+.item-title {
+  font-size: 1rem;
+}
+
+.item-body {
+  font-size: 0.75rem;
+}
+
+.item-footer {
+  padding: 0.75rem;
+}
+
+.tech-item {
+  transition: background-color 0.3s ease;
+}
+
+.highlight {
+  background-color: rgba(255, 255, 0, 0.3);
+}

@@ -75,6 +75,21 @@ export class TechnologyService {
     });
   }
 
+  async updateDraftAndPublish(id: string, technology: Partial<TechnologyDTO>): Promise<any> {
+    const existingTechnology = await this.technologyRepository.getById(id);
+    if (existingTechnology?.published) {
+      throw new ValidationError("Cannot update and publish an already published technology using updateDraftAndPublish. Use update instead.");
+    }
+
+    this.validateTechnology(technology);
+
+    return this.technologyRepository.update(id, {
+      ...technology,
+      published: true,
+      publishedAt: new Date()
+    });
+  }
+
 
   async delete(id: string): Promise<any> {
     return this.technologyRepository.delete(id);

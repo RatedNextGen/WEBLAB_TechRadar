@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RadarViewerComponent } from './radar-viewer.component';
+import { RadarComponent } from './radar.component';
 
 describe('RadarComponent', () => {
-  let component: RadarViewerComponent;
-  let fixture: ComponentFixture<RadarViewerComponent>;
+  let component: RadarComponent;
+  let fixture: ComponentFixture<RadarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RadarViewerComponent],
+      imports: [RadarComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RadarViewerComponent);
+    fixture = TestBed.createComponent(RadarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

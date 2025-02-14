@@ -1,9 +1,9 @@
-<button [routerLink]="'logout'">Logout</button>
-<p>Hallo {{userRole}}</p>
-@let canAdministrate = userRole !== UserRole.EMPLOYEE;
-@if (canAdministrate){
-  <app-technology-create></app-technology-create>
-}
-
-<app-radar-viewer [canAdministrate]="canAdministrate"></app-radar-viewer>
-
+<app-navbar [userRole]="userRole" (createNewTechnologyClicked)="handleNewTechnology()"></app-navbar>
+<div class="container">
+  <div class="list-container">
+    <app-technology-list #technologyList [canAdministrate]="userRole !== UserRole.EMPLOYEE"></app-technology-list>
+  </div>
+  <div class="radar-container">
+    <app-radar (technologySelected)="handleTechnologySelected($event)"></app-radar>
+  </div>
+</div>

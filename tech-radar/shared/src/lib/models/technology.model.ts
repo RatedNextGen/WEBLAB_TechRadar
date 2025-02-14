@@ -18,7 +18,7 @@ export interface TechnologyDTO {
   category: TechnologyCategory;
   maturity: TechnologyMaturity;
   description: string;
-  publishedAt: Date;
+  publishedAt: Date | null;
   published: boolean;
   readonly createdAt?: Date;
   readonly updatedAt?: Date;

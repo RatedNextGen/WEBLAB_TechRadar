@@ -1,0 +1,42 @@
+@if (groupedTechnologies$ | async; as groupedTechs) {
+  <div class="technologies-container">
+    @for (group of groupedTechs; track group.category) {
+      <h3>{{ group.category | uppercase }}</h3>
+      @for (subGroup of group.maturities; track subGroup.maturity) {
+        <h4>{{ subGroup.maturity | uppercase }}</h4>
+        <div class="tech-item-container">
+          @for (tech of subGroup.items; track tech._id) {
+            <mat-card appearance="outlined">
+              <mat-card-header>
+                @if (tech.published) {
+                  <mat-card-title class="item-title" [attr.id]="tech._id">{{ tech.name }}</mat-card-title>
+                } @else {
+                  <mat-card-title class="item-title" [attr.id]="tech._id"><span
+                    class="draft-title">DRAFT: </span>{{ tech.name }}
+                  </mat-card-title>
+                }
+              </mat-card-header>
+              <mat-card-content class="item-body">
+                <p [attr.id]="tech._id">{{ tech.description }}</p>
+              </mat-card-content>
+              @if (canAdministrate) {
+                <mat-card-footer class="item-footer">
+                  <mat-chip-set>
+                    <mat-chip (click)="onEdit(tech)">Edit</mat-chip>
+                    <mat-chip (click)="onDelete(tech._id)">Delete</mat-chip>
+                  </mat-chip-set>
+                </mat-card-footer>
+              }
+            </mat-card>
+          }
+        </div>
+      } @empty {
+        <p> No items exists for this category</p>
+      }
+    } @empty {
+      <p>No items found</p>
+    }
+  </div>
+} @else {
+  <p>Loading technologies...</p>
+}

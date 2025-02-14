@@ -10,8 +10,10 @@ export const connectDB = async () => {
   try {
     await mongoose.connect('mongodb://localhost:27017/technologyRadar');
     logger.info('MongoDB connected successfully!');
-    await resetUsers();
-    await resetTechnologies();
+    await Promise.all([
+      await resetUsers(),
+      await resetTechnologies()
+    ]);
   } catch (error) {
     logger.error(`MongoDB connection error: ${error}`);
     process.exit(1);
@@ -24,13 +26,13 @@ export const connectDB = async () => {
  */
 const resetUsers = async () => {
   try {
-    logger.info("Drop all users");
+    logger.info('Drop all users');
     await UserModel.deleteMany({});
 
     const users = [
-      { email: "cto@hslu.ch", password: "cto123", role: UserRole.CTO },
-      { email: "techlead@hslu.ch", password: "techlead123", role: UserRole.TECH_LEAD },
-      { email: "employee@hslu.ch", password: "employee123", role: UserRole.EMPLOYEE }
+      { email: 'cto@hslu.ch', password: 'cto123', role: UserRole.CTO },
+      { email: 'techlead@hslu.ch', password: 'techlead123', role: UserRole.TECH_LEAD },
+      { email: 'employee@hslu.ch', password: 'employee123', role: UserRole.EMPLOYEE }
     ];
 
     const hashedUsers = await Promise.all(
@@ -41,7 +43,7 @@ const resetUsers = async () => {
     );
 
     await UserModel.insertMany(hashedUsers);
-    logger.info("Users added successfully");
+    logger.info('Users added successfully');
   } catch (error) {
     logger.error(`Error adding users ${error}`);
   }
@@ -53,13 +55,13 @@ const resetUsers = async () => {
  */
 const resetTechnologies = async () => {
   try {
-    logger.info("Drop all technologies");
+    logger.info('Drop all technologies');
     await TechnologyModel.deleteMany({});
 
     const technologies = getSampleTechnologies();
 
     await TechnologyModel.insertMany(technologies);
-    logger.info("Technology added successfully");
+    logger.info('Technology added successfully');
   } catch (error) {
     logger.error(`Error adding technologies ${error}`);
   }

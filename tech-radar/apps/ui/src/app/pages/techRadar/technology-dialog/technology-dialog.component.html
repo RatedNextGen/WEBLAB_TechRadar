@@ -1,0 +1,72 @@
+<h1 mat-dialog-title>
+  {{ mode === TechnologyDialogMode.CREATE ? 'Create Technology' : 'Edit Technology' }}
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field class="full-width">
+      <label>Name</label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <label>Category</label>
+      <mat-select formControlName="category">
+        <mat-option [value]="TechnologyCategory.Techniques">{{ TechnologyCategory.Techniques }}</mat-option>
+        <mat-option [value]="TechnologyCategory.Platforms">{{ TechnologyCategory.Platforms }}</mat-option>
+        <mat-option [value]="TechnologyCategory.Tools">{{ TechnologyCategory.Tools }}</mat-option>
+        <mat-option
+          [value]="TechnologyCategory.LanguagesAndFrameworks">{{ TechnologyCategory.LanguagesAndFrameworks }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <label>Maturity</label>
+      <mat-select formControlName="maturity">
+        <mat-option [value]="TechnologyMaturity.Adopt">{{ TechnologyMaturity.Adopt }}</mat-option>
+        <mat-option [value]="TechnologyMaturity.Assess">{{ TechnologyMaturity.Assess }}</mat-option>
+        <mat-option [value]="TechnologyMaturity.Hold">{{ TechnologyMaturity.Hold }}</mat-option>
+        <mat-option [value]="TechnologyMaturity.Trial">{{ TechnologyMaturity.Trial }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <label>Description</label>
+      <textarea matInput formControlName="description" rows="10"></textarea>
+    </mat-form-field>
+  </form>
+  @if (mode === TechnologyDialogMode.EDIT) {
+    <div class="meta-data-container">
+      <p>Created at: {{ data.technology.createdAt | date: 'long' }}</p>
+      <p>Updated at: {{ data.technology.updatedAt | date: 'long' }}</p>
+      @if (data.technology.published) {
+        <p>Published at: {{ data.technology.publishedAt | date: 'long' }}</p>
+      }
+    </div>
+  }
+</div>
+<div mat-dialog-actions>
+  @if (mode === TechnologyDialogMode.CREATE) {
+    <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!editForm.valid">Save Draft</button>
+    <span
+      [matTooltip]="!editForm.valid ? 'Description must be filled out in order to save and publish' : ''"
+      matTooltipPosition="above">
+      <button mat-button color="primary" (click)="onSave()"
+              [disabled]="isDescriptionEmpty() || !editForm.valid">
+        Save and Publish
+      </button>
+    </span>
+  } @else {
+    @if (!isPublished) {
+      <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!editForm.valid">Save Draft</button>
+      <span
+        [matTooltip]="isDescriptionEmpty() ? 'Description must be filled out in order to save and publish' : ''"
+        matTooltipPosition="above">
+      <button mat-button color="primary" (click)="onSave()"
+              [disabled]="isDescriptionEmpty() || !editForm.valid">
+        Save and Publish
+      </button>
+    </span>
+    } @else {
+      <button mat-button color="primary" (click)="onSave()" [disabled]="!editForm.valid">Save</button>
+    }
+  }
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>
