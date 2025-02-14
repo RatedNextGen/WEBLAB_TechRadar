@@ -1,5 +1,13 @@
 <h1 mat-dialog-title>
-  {{ mode === TechnologyDialogMode.CREATE ? 'Create Technology' : 'Edit Technology' }}
+  @if (mode === TechnologyDialogMode.CREATE){
+    Create Technology
+  }
+  @if (mode === TechnologyDialogMode.EDIT){
+    Edit Technology
+  }
+  @if (mode === TechnologyDialogMode.CHANGE_MATURITY){
+    Change Maturity
+  }
 </h1>
 <div mat-dialog-content>
   <form [formGroup]="editForm">

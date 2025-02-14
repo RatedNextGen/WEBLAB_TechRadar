@@ -23,7 +23,10 @@
                 <mat-card-footer class="item-footer">
                   <mat-chip-set>
                     <mat-chip (click)="onEdit(tech)">Edit</mat-chip>
-                    <mat-chip (click)="onDelete(tech._id)">Delete</mat-chip>
+                    @if (tech.published) {
+                      <mat-chip (click)="onChangeMaturity(tech)">Change Maturity</mat-chip>
+                    }
+                    <mat-chip (click)="onDelete(tech)">Delete</mat-chip>
                   </mat-chip-set>
                 </mat-card-footer>
               }

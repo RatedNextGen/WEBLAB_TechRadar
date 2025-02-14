@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ data.message }}</h1>
+<div mat-dialog-content>
+  <p>This action cannot be undone.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">No</button>
+  <button mat-button color="warn" (click)="onConfirm()">Yes</button>
+</div>

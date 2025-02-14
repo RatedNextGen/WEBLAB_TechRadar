@@ -1,10 +1,6 @@
 import { TechnologyCategory, TechnologyMaturity } from '../../../../../../shared/src/lib/models/technology.model';
 
 export const baseUrl = 'http://localhost:8080/api';
-export enum SaveActionType {
-  PUBLISH = 'save',
-  DRAFT = 'draft',
-}
 
 export const maturityOrder = [
   TechnologyMaturity.Adopt,

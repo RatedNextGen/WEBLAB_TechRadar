@@ -9,11 +9,17 @@ import {
 import { Observable } from 'rxjs';
 import { RadarComponent } from '../radar/radar.component';
 import { map } from 'rxjs/operators';
-import { categoryOrder, maturityOrder, SaveActionType } from '../../utils/constants';
+import { categoryOrder, maturityOrder } from '../../utils/constants';
 import { MatCard, MatCardContent, MatCardFooter, MatCardHeader } from '@angular/material/card';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { TechnologyDialogMode, TechnologyDialogComponent } from '../technology-dialog/technology-dialog.component';
+import {
+  TechnologyDialogMode,
+  TechnologyDialogComponent,
+  TechnologyDialogData, TechnologyDialogResult, SaveActionType
+} from '../technology-dialog/technology-dialog.component';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import { MatButton } from '@angular/material/button';
 
 interface GroupedTechnologies {
   category: TechnologyCategory;
@@ -25,7 +31,7 @@ interface GroupedTechnologies {
 
 @Component({
   selector: 'app-technology-list',
-  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip],
+  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip, MatButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './technology-list.component.html',
   styleUrl: './technology-list.component.scss',
@@ -75,10 +81,22 @@ export class TechnologyListComponent implements OnInit {
     );
   }
 
-  onDelete(technologyId: string | undefined) {
-    if (technologyId) {
-      this.technologyService.deleteTechnology(technologyId).subscribe();
+  onDelete(technology: TechnologyDTO): void {
+    if (!technology) {
+      return;
     }
+
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent,
+      {
+        width: '350px',
+        data: { message: `Do you really want to delete ${technology.name}?` }
+      });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed && technology._id) {
+        this.technologyService.deleteTechnology(technology._id).subscribe();
+      }
+    });
   }
 
   onEdit(tech: TechnologyDTO) {
@@ -92,21 +110,27 @@ export class TechnologyListComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      const { action, data } = result as { action: SaveActionType, data: TechnologyDTO };
-      if (result) {
-        if (action === SaveActionType.PUBLISH) {
-          if (data.published) {
-            this.technologyService.update(data).subscribe();
-          } else {
-            this.technologyService.updateDraftAndPublish(data).subscribe();
-          }
-        }
-        if (action === SaveActionType.DRAFT) {
-          this.technologyService.updateDraft(data).subscribe();
-        }
+      if (result.action === SaveActionType.PUBLISH || result.action === SaveActionType.DRAFT) {
+        this.handleUpdate(result);
       }
     });
+  }
 
+  onChangeMaturity(tech: TechnologyDTO) {
+    const dialogRef = this.dialog.open(TechnologyDialogComponent, {
+        width: '400px',
+        data: {
+          mode: TechnologyDialogMode.CHANGE_MATURITY,
+          technology: { ...tech }
+        }
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.handleUpdate(result);
+      }
+    });
   }
 
   scrollToTechnology(techId: string): void {
@@ -115,6 +139,24 @@ export class TechnologyListComponent implements OnInit {
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       element.classList.add('highlight');
       setTimeout(() => element.classList.remove('highlight'), 2000);
+    }
+  }
+
+  private handleUpdate(result: TechnologyDialogResult) {
+    const { action, data } = result;
+    if (result) {
+      if (action === SaveActionType.PUBLISH) {
+        if (data.published) {
+          this.technologyService.update(data).subscribe();
+        } else {
+          console.log(data);
+          this.technologyService.updateDraftAndPublish(data).subscribe();
+        }
+      }
+      if (action === SaveActionType.DRAFT) {
+        console.log(data);
+        this.technologyService.updateDraft(data).subscribe();
+      }
     }
   }
 }

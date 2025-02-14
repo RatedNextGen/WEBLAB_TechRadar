@@ -4,18 +4,20 @@ import { AuthService } from '../../services/auth.service';
 import { UserRole } from '../../../../../../shared/src/lib/models/user.model';
 import { RouterLink } from '@angular/router';
 import { TechnologyListComponent } from './technology-list/technology-list.component';
-import { TechnologyCreateComponent } from './technology-create/technology-create.component';
 import { RadarComponent } from './radar/radar.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TechnologyService } from '../../services/technology.service';
 import { TechnologyDTO } from '../../../../../../shared/src/lib/models/technology.model';
 import { MatDialog } from '@angular/material/dialog';
-import { TechnologyDialogMode, TechnologyDialogComponent } from './technology-dialog/technology-dialog.component';
-import { SaveActionType } from '../utils/constants';
+import {
+  TechnologyDialogMode,
+  TechnologyDialogComponent,
+  SaveActionType
+} from './technology-dialog/technology-dialog.component';
 
 @Component({
   selector: 'app-tech-radar',
-  imports: [CommonModule, RouterLink, TechnologyListComponent, TechnologyCreateComponent, RadarComponent, NavbarComponent],
+  imports: [CommonModule, RouterLink, TechnologyListComponent, RadarComponent, NavbarComponent],
   templateUrl: './techRadar.component.html',
   styleUrl: './techRadar.component.scss',
   standalone: true
@@ -56,13 +58,15 @@ export class TechRadarComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      const { action, data } = result as { action: SaveActionType, data: TechnologyDTO };
       if (result) {
-        if (action === SaveActionType.PUBLISH) {
+        const { action, data } = result as { action: SaveActionType, data: TechnologyDTO };
+        if (result) {
+          if (action === SaveActionType.PUBLISH) {
             this.technologyService.create(data).subscribe();
-        }
-        if (action === SaveActionType.DRAFT) {
-          this.technologyService.createDraft(data).subscribe();
+          }
+          if (action === SaveActionType.DRAFT) {
+            this.technologyService.createDraft(data).subscribe();
+          }
         }
       }
     });
