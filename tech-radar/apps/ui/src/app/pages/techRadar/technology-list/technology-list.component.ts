@@ -137,7 +137,6 @@ export class TechnologyListComponent implements OnInit {
         if (data.published) {
           this.technologyService.update(data).subscribe();
         } else {
-          console.log(data);
           this.technologyService.updateDraftAndPublish(data).subscribe();
         }
       }

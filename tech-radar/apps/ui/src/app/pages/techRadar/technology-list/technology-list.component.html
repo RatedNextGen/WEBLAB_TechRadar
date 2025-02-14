@@ -1,43 +1,46 @@
 @if (groupedTechnologies$ | async; as groupedTechs) {
   <div class="technologies-container">
     @for (group of groupedTechs; track group.category) {
-      <h3>{{ group.category | uppercase }}</h3>
-      @for (subGroup of group.maturities; track subGroup.maturity) {
-        <h4>{{ subGroup.maturity | uppercase }}</h4>
-        <div class="tech-item-container">
-          @for (tech of subGroup.items; track tech._id) {
-            <mat-accordion>
-              <mat-expansion-panel [attr.id]="tech._id">
-                <mat-expansion-panel-header>
-                  @if (tech.published) {
-                    <mat-panel-title class="item-title">{{ tech.name }}</mat-panel-title>
-                  } @else {
-                    <mat-panel-title class="item-title"><span
-                      class="draft-title">DRAFT:</span>{{ tech.name }}
-                    </mat-panel-title>
-                  }
-                </mat-expansion-panel-header>
-                <div class="item-body">
-                  <p [attr.id]="tech._id">{{ tech.description }}</p>
-                </div>
-                <mat-divider></mat-divider>
-                @if (canAdministrate) {
-                  <div class="item-footer">
-                    <button mat-button (click)="onEdit(tech)">Edit</button>
+      <div class="category-container">
+        <h3 class="category-title">{{ group.category | uppercase }}</h3>
+        @for (subGroup of group.maturities; track subGroup.maturity) {
+          <div class="tech-item-container">
+            <h4>{{ subGroup.maturity | uppercase }}</h4>
+            @for (tech of subGroup.items; track tech._id) {
+              <mat-accordion>
+                <mat-expansion-panel [attr.id]="tech._id">
+                  <mat-expansion-panel-header>
                     @if (tech.published) {
-                      <button mat-button (click)="onChangeMaturity(tech)">Change Maturity</button>
+                      <mat-panel-title class="item-title">{{ tech.name }}</mat-panel-title>
+                    } @else {
+                      <mat-panel-title class="item-title"><span
+                        class="draft-title">DRAFT:</span>{{ tech.name }}
+                      </mat-panel-title>
                     }
-                    <button mat-button (click)="onDelete(tech)">Delete</button>
-
+                  </mat-expansion-panel-header>
+                  <div class="item-body">
+                    <p [attr.id]="tech._id">{{ tech.description }}</p>
                   </div>
-                }
-              </mat-expansion-panel>
-            </mat-accordion>
-          }
-        </div>
-      } @empty {
-        <p> No items exists for this category</p>
-      }
+                  <mat-divider></mat-divider>
+                  @if (canAdministrate) {
+                    <div class="item-footer">
+                      <button mat-button (click)="onEdit(tech)">Edit</button>
+                      @if (tech.published) {
+                        <button mat-button (click)="onChangeMaturity(tech)">Change Maturity</button>
+                      }
+                      <button mat-button (click)="onDelete(tech)">Delete</button>
+
+                    </div>
+                  }
+                </mat-expansion-panel>
+              </mat-accordion>
+            }
+          </div>
+        } @empty {
+          <p> No items exists for this category</p>
+        }
+      </div>
+      <mat-divider></mat-divider>
     } @empty {
       <p>No items found</p>
     }
