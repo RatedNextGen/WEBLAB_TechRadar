@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyService } from '../../../services/technology.service';
 import {
@@ -21,6 +21,13 @@ import {
 } from '../technology-dialog/technology-dialog.component';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatButton } from '@angular/material/button';
+import {
+  MatAccordion, MatExpansionModule,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelTitle
+} from '@angular/material/expansion';
+import { MatDivider } from '@angular/material/divider';
 
 interface GroupedTechnologies {
   category: TechnologyCategory;
@@ -34,7 +41,7 @@ interface Maturities {
 
 @Component({
   selector: 'app-technology-list',
-  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip, MatButton],
+  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip, MatButton, MatExpansionModule, MatDivider],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './technology-list.component.html',
   styleUrl: './technology-list.component.scss',
@@ -43,6 +50,7 @@ interface Maturities {
 export class TechnologyListComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   @Input() canAdministrate: boolean = false;
+  readonly panelOpenState = signal(false);
   groupedTechnologies$!: Observable<GroupedTechnologies[]>;
 
   constructor(private technologyService: TechnologyService) {

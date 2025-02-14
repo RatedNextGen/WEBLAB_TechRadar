@@ -16,7 +16,7 @@
 }
 
 .item-title {
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
 
 .item-body {
@@ -25,6 +25,8 @@
 
 .item-footer {
   padding: 0.75rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .tech-item {

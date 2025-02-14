@@ -6,31 +6,33 @@
         <h4>{{ subGroup.maturity | uppercase }}</h4>
         <div class="tech-item-container">
           @for (tech of subGroup.items; track tech._id) {
-            <mat-card appearance="outlined">
-              <mat-card-header>
-                @if (tech.published) {
-                  <mat-card-title class="item-title" [attr.id]="tech._id">{{ tech.name }}</mat-card-title>
-                } @else {
-                  <mat-card-title class="item-title" [attr.id]="tech._id"><span
-                    class="draft-title">DRAFT: </span>{{ tech.name }}
-                  </mat-card-title>
-                }
-              </mat-card-header>
-              <mat-card-content class="item-body">
-                <p [attr.id]="tech._id">{{ tech.description }}</p>
-              </mat-card-content>
-              @if (canAdministrate) {
-                <mat-card-footer class="item-footer">
-                  <mat-chip-set>
-                    <mat-chip (click)="onEdit(tech)">Edit</mat-chip>
+            <mat-accordion>
+              <mat-expansion-panel [attr.id]="tech._id">
+                <mat-expansion-panel-header>
+                  @if (tech.published) {
+                    <mat-panel-title class="item-title">{{ tech.name }}</mat-panel-title>
+                  } @else {
+                    <mat-panel-title class="item-title"><span
+                      class="draft-title">DRAFT:</span>{{ tech.name }}
+                    </mat-panel-title>
+                  }
+                </mat-expansion-panel-header>
+                <div class="item-body">
+                  <p [attr.id]="tech._id">{{ tech.description }}</p>
+                </div>
+                <mat-divider></mat-divider>
+                @if (canAdministrate) {
+                  <div class="item-footer">
+                    <button mat-button (click)="onEdit(tech)">Edit</button>
                     @if (tech.published) {
-                      <mat-chip (click)="onChangeMaturity(tech)">Change Maturity</mat-chip>
+                      <button mat-button (click)="onChangeMaturity(tech)">Change Maturity</button>
                     }
-                    <mat-chip (click)="onDelete(tech)">Delete</mat-chip>
-                  </mat-chip-set>
-                </mat-card-footer>
-              }
-            </mat-card>
+                    <button mat-button (click)="onDelete(tech)">Delete</button>
+
+                  </div>
+                }
+              </mat-expansion-panel>
+            </mat-accordion>
           }
         </div>
       } @empty {
