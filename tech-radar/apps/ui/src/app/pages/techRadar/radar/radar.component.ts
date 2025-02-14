@@ -110,33 +110,48 @@ export class RadarComponent implements OnInit {
 
   private drawItems(items: TechnologyDTO[]): void {
     const ringThickness = this.radius / maturityOrder.length;
+    const placedPositions: { x: number; y: number }[] = [];
+    const circleRadius = 10; // radius of each circle
 
     items.forEach(item => {
+      // Determine ring (maturity)
       const maturityIndex = maturityOrder.indexOf(item.maturity);
       if (maturityIndex < 0) { return; }
       const innerRadius = maturityIndex * ringThickness;
       const outerRadius = (maturityIndex + 1) * ringThickness;
-      const generatedLocation = innerRadius + Math.random() * (outerRadius - innerRadius);
 
+      // Determine quadrant (category)
       const categoryIndex = categoryOrder.indexOf(item.category);
       if (categoryIndex < 0) { return; }
       const angleSector = (2 * Math.PI) / categoryOrder.length;
       const startAngle = categoryIndex * angleSector;
-      const angle = startAngle + Math.random() * angleSector;
 
-      const x = generatedLocation * Math.cos(angle);
-      const y = generatedLocation * Math.sin(angle);
+      // Find a non-overlapping position with up to 10 attempts
+      let x: number, y: number;
+      let attempt = 0;
+      const maxAttempts = 10;
+      do {
+        const r = innerRadius + Math.random() * (outerRadius - innerRadius);
+        const angle = startAngle + Math.random() * angleSector;
+        x = r * Math.cos(angle);
+        y = r * Math.sin(angle);
+        attempt++;
+      } while (this.overlaps(x, y, circleRadius, placedPositions) && attempt < maxAttempts);
 
+      // Save the position so subsequent items can check against it.
+      placedPositions.push({ x, y });
+
+      // Append the circle and text
       this.itemsGroup.append('circle')
         .attr('cx', x)
         .attr('cy', y)
-        .attr('r', 10)
-        .attr('fill', item.published? this.getColourByMaturity(item): '#f00')
+        .attr('r', circleRadius)
+        .attr('fill', item.published ? this.getColourByMaturity(item) : '#f00')
         .attr('stroke', '#fff')
         .attr('stroke-width', 1)
         .on('mouseover', () => {
           this.technologySelected.emit(item);
-        })
+        });
 
       this.itemsGroup.append('text')
         .attr('x', x + 12)
@@ -173,5 +188,17 @@ export class RadarComponent implements OnInit {
       case TechnologyMaturity.Trial:
         return '#E9D985';
     }
+  }
+
+  /**
+   * Checks if a circle at (x, y) with radius `radius` overlaps any circles in `positions`.
+   */
+  private overlaps(x: number, y: number, radius: number, positions: { x: number; y: number }[]): boolean {
+    return positions.some(pos => {
+      const dx = x - pos.x;
+      const dy = y - pos.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      return distance < radius * 3;
+    });
   }
 }
