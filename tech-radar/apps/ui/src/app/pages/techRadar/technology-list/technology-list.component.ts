@@ -21,13 +21,9 @@ import {
 } from '../technology-dialog/technology-dialog.component';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatButton } from '@angular/material/button';
-import {
-  MatAccordion, MatExpansionModule,
-  MatExpansionPanel,
-  MatExpansionPanelDescription,
-  MatExpansionPanelTitle
-} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDivider } from '@angular/material/divider';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 
 interface GroupedTechnologies {
   category: TechnologyCategory;
@@ -41,7 +37,7 @@ interface Maturities {
 
 @Component({
   selector: 'app-technology-list',
-  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip, MatButton, MatExpansionModule, MatDivider],
+  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip, MatButton, MatExpansionModule, MatDivider, MatGridList, MatGridTile],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './technology-list.component.html',
   styleUrl: './technology-list.component.scss',
