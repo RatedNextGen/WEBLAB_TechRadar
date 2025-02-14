@@ -12,8 +12,11 @@ const mockRepository = {
   getAllForUsers: jest.fn(),
   getById: jest.fn(),
   create: jest.fn(),
+  createDraft: jest.fn(),
   findByNameAndCategory: jest.fn(),
   update: jest.fn(),
+  updateDraft: jest.fn(),
+  updateDraftAndPublish: jest.fn(),
   delete: jest.fn(),
 };
 
@@ -156,6 +159,26 @@ describe("TechnologyService", () => {
     }));
   });
 
+  it("should update a draft technology and publish", async () => {
+    const draftUpdate = {
+      name: "Updated Draft and publish",
+      category: TechnologyCategory.Tools,
+      description: "Draft update",
+      published: false,
+    };
+
+    mockRepository.getById.mockResolvedValue({ published: false });
+    mockRepository.update.mockResolvedValue(draftUpdate);
+
+    const result = await technologyService.updateDraftAndPublish("456", draftUpdate);
+
+    expect(result).toEqual(draftUpdate);
+    expect(mockRepository.update).toHaveBeenCalledWith("456", expect.objectContaining({
+      name: "Updated Draft and publish",
+      published: true,
+    }));
+  });
+
   it("should throw ValidationError when trying to update a published technology with updateDraft()", async () => {
     mockRepository.getById.mockResolvedValue({ published: true });
 
@@ -168,6 +191,14 @@ describe("TechnologyService", () => {
     mockRepository.getById.mockResolvedValue({ published: false });
 
     await expect(technologyService.update("123", { name: "Invalid Update" }))
+      .rejects
+      .toThrow(ValidationError);
+  });
+
+  it("should throw ValidationError when trying to update and publish an already published tech", async () => {
+    mockRepository.getById.mockResolvedValue({ published: true });
+
+    await expect(technologyService.updateDraftAndPublish("123", { name: "Invalid Update" }))
       .rejects
       .toThrow(ValidationError);
   });
