@@ -1,8 +1,9 @@
 @if (groupedTechnologies$ | async; as groupedTechs) {
   <div class="technologies-container">
     @for (group of groupedTechs; track group.category) {
+      <h3 class="category-title">{{ group.category | uppercase }}</h3>
       <div class="category-container">
-        <h3 class="category-title">{{ group.category | uppercase }}</h3>
+
         @for (subGroup of group.maturities; track subGroup.maturity) {
           <div class="tech-item-container">
             <h4>{{ subGroup.maturity | uppercase }}</h4>
