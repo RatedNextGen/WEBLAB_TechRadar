@@ -57,6 +57,7 @@ export enum TechnologyDialogMode {
 export class TechnologyDialogComponent {
   protected readonly TechnologyCategory = TechnologyCategory;
   protected readonly TechnologyMaturity = TechnologyMaturity;
+  protected readonly TechnologyDialogMode = TechnologyDialogMode;
   editForm: FormGroup;
   isPublished: boolean = false;
   mode: TechnologyDialogMode;
@@ -71,43 +72,16 @@ export class TechnologyDialogComponent {
 
   private initializeForm(data: TechnologyDTO) {
     if (this.mode === TechnologyDialogMode.CHANGE_MATURITY) {
-      const form = this.fb.group({
-        name: [data.name, Validators.required],
-        category: [data.category, Validators.required],
-        maturity: [data.maturity, Validators.required],
-        description: [data.description, Validators.required]
-      });
-      form.controls['name'].disable();
-      form.controls['category'].disable();
-
-      return form;
+      return this.createChangeMaturityForm(data);
     }
     if (this.mode === TechnologyDialogMode.EDIT) {
       if (this.isPublished) {
-        const form = this.fb.group({
-          name: [data.name, Validators.required],
-          category: [data.category, Validators.required],
-          maturity: [data.maturity, Validators.required],
-          description: [data.description, Validators.required]
-        });
-        form.controls['maturity'].disable();
-
-        return form;
+        return this.createFormForPublished(data);
       } else {
-        return this.fb.group({
-          name: [data.name, Validators.required],
-          category: [data.category, Validators.required],
-          maturity: [data.maturity],
-          description: [data.description]
-        });
+        return this.createDraftForm(data);
       }
     }
-    return this.fb.group({
-      name: ['', Validators.required],
-      category: [[], Validators.required],
-      maturity: [[], Validators.required],
-      description: ['', Validators.required]
-    });
+    return this.createEmptyForm();
   }
 
   onSave(): void {
@@ -139,5 +113,47 @@ export class TechnologyDialogComponent {
     return !value || value.trim().length === 0;
   }
 
-  protected readonly TechnologyDialogMode = TechnologyDialogMode;
+
+  private createEmptyForm() {
+    return this.fb.group({
+      name: ['', Validators.required],
+      category: [[], Validators.required],
+      maturity: [[], Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
+  private createFormForPublished(data: TechnologyDTO) {
+    const form = this.fb.group({
+      name: [data.name, Validators.required],
+      category: [data.category, Validators.required],
+      maturity: [data.maturity, Validators.required],
+      description: [data.description, Validators.required]
+    });
+    form.controls['maturity'].disable();
+
+    return form;
+  }
+
+  private createChangeMaturityForm(data: TechnologyDTO) {
+    const form = this.fb.group({
+      name: [data.name, Validators.required],
+      category: [data.category, Validators.required],
+      maturity: [data.maturity, Validators.required],
+      description: [data.description, Validators.required]
+    });
+    form.controls['name'].disable();
+    form.controls['category'].disable();
+
+    return form;
+  }
+
+  private createDraftForm(data: TechnologyDTO) {
+    return this.fb.group({
+      name: [data.name, Validators.required],
+      category: [data.category, Validators.required],
+      maturity: [data.maturity],
+      description: [data.description]
+    });
+  }
 }

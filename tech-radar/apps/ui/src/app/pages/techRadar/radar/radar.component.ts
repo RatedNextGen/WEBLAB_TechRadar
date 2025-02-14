@@ -131,7 +131,7 @@ export class RadarComponent implements OnInit {
         .attr('cx', x)
         .attr('cy', y)
         .attr('r', 10)
-        .attr('fill', this.getColourByMaturity(item))
+        .attr('fill', item.published? this.getColourByMaturity(item): '#f00')
         .attr('stroke', '#fff')
         .attr('stroke-width', 1)
         .on('mouseover', () => {

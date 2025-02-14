@@ -110,9 +110,7 @@ export class TechnologyListComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.action === SaveActionType.PUBLISH || result.action === SaveActionType.DRAFT) {
         this.handleUpdate(result);
-      }
     });
   }
 
@@ -143,6 +141,9 @@ export class TechnologyListComponent implements OnInit {
   }
 
   private handleUpdate(result: TechnologyDialogResult) {
+    if (!result){
+      return;
+    }
     const { action, data } = result;
     if (result) {
       if (action === SaveActionType.PUBLISH) {

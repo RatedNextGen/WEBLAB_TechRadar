@@ -12,8 +12,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       category: TechnologyCategory.Techniques,
       maturity: TechnologyMaturity.Adopt,
       description: 'Adopt a service-oriented architecture with independently deployable services.',
-      publishedAt: null,
-      published: false
+      publishedAt: new Date('2021-01-03'),
+      published: true
     },
     {
       name: 'Domain-Driven Design',
@@ -32,20 +32,12 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       published: true
     },
     {
-      name: 'Reactive Programming',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'Implement systems that react to change with asynchronous data streams.',
-      publishedAt: new Date('2023-01-04'),
-      published: true
-    },
-    {
       name: 'Test-Driven Development',
       category: TechnologyCategory.Techniques,
       maturity: TechnologyMaturity.Adopt,
       description: 'Write tests before coding to improve quality and design.',
-      publishedAt: new Date('2023-01-05'),
-      published: true
+      publishedAt: null,
+      published: false
     },
 
     // --- Techniques - Assess
@@ -73,23 +65,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2023-02-03'),
       published: true
     },
-    {
-      name: 'Chaos Engineering',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Assess,
-      description: 'Test the resilience of systems by introducing controlled failure.',
-      publishedAt: new Date('2023-02-04'),
-      published: true
-    },
-    {
-      name: 'Shift-Left Testing',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Assess,
-      description: 'Integrate testing early in the software development lifecycle.',
-      publishedAt: new Date('2023-02-05'),
-      published: true
-    },
-
     // --- Techniques - Hold
     {
       name: 'Monolithic Architecture',
@@ -99,38 +74,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2023-03-01'),
       published: true
     },
-    {
-      name: 'Waterfall Model',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Hold,
-      description: 'A linear sequential software development process that lacks flexibility.',
-      publishedAt: new Date('2023-03-02'),
-      published: true
-    },
-    {
-      name: 'Legacy Integration Patterns',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Hold,
-      description: 'Outdated integration methods that hinder modernization efforts.',
-      publishedAt: new Date('2023-03-03'),
-      published: true
-    },
-    {
-      name: 'Big Ball of Mud',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Hold,
-      description: 'An unstructured, haphazardly assembled software architecture.',
-      publishedAt: new Date('2023-03-04'),
-      published: true
-    },
-    {
-      name: 'Manual Code Reviews',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Hold,
-      description: 'Time-consuming review processes that are prone to human error.',
-      publishedAt: null,
-      published: false
-    },
 
     // --- Techniques - Trial
     {
@@ -139,38 +82,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       maturity: TechnologyMaturity.Trial,
       description: 'Experiment with flexible APIs that allow clients to specify data needs.',
       publishedAt: new Date('2023-04-01'),
-      published: true
-    },
-    {
-      name: 'AI-Driven Development',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Trial,
-      description: 'Explore using artificial intelligence to assist in code generation and testing.',
-      publishedAt: new Date('2023-04-02'),
-      published: true
-    },
-    {
-      name: 'Blockchain for Business',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Trial,
-      description: 'Evaluate blockchain technology for secure, decentralized business processes.',
-      publishedAt: null,
-      published: false
-    },
-    {
-      name: 'Low-Code Development',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Trial,
-      description: 'Experiment with platforms that allow rapid application development with minimal coding.',
-      publishedAt: new Date('2023-04-04'),
-      published: true
-    },
-    {
-      name: 'Edge Computing',
-      category: TechnologyCategory.Techniques,
-      maturity: TechnologyMaturity.Trial,
-      description: 'Trial processing data closer to its source to reduce latency.',
-      publishedAt: new Date('2023-04-05'),
       published: true
     },
 
@@ -183,38 +94,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2023-05-01'),
       published: true
     },
-    {
-      name: 'Azure',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'Microsoft Azure offers a robust set of cloud services and solutions.',
-      publishedAt: new Date('2023-05-02'),
-      published: true
-    },
-    {
-      name: 'Google Cloud Platform',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'Google Cloud provides scalable and reliable cloud computing services.',
-      publishedAt: null,
-      published: false
-    },
-    {
-      name: 'IBM Cloud',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'IBM Cloud delivers enterprise-grade cloud solutions.',
-      publishedAt: new Date('2023-05-04'),
-      published: true
-    },
-    {
-      name: 'Oracle Cloud',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'Oracle Cloud offers a complete suite of cloud applications and services.',
-      publishedAt: new Date('2023-05-05'),
-      published: true
-    },
 
     // --- Platforms - Assess
     {
@@ -224,30 +103,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       description: 'Cloud infrastructure built for simplicity and efficiency.',
       publishedAt: new Date('2023-06-01'),
       published: true
-    },
-    {
-      name: 'Heroku',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Assess,
-      description: 'A platform as a service (PaaS) that enables quick app deployment.',
-      publishedAt: new Date('2023-06-02'),
-      published: true
-    },
-    {
-      name: 'Alibaba Cloud',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Assess,
-      description: 'Alibaba Cloud provides a broad suite of global cloud computing services.',
-      publishedAt: new Date('2023-06-03'),
-      published: true
-    },
-    {
-      name: 'Linode',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Assess,
-      description: 'Offering simplified cloud infrastructure with a focus on developers.',
-      publishedAt: null,
-      published: false
     },
     {
       name: 'Vultr',
@@ -265,30 +120,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       maturity: TechnologyMaturity.Hold,
       description: 'An open source cloud computing platform often used in private cloud setups.',
       publishedAt: new Date('2023-07-01'),
-      published: true
-    },
-    {
-      name: 'VMware vSphere',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Hold,
-      description: 'A virtualization platform for building and managing virtual infrastructures.',
-      publishedAt: new Date('2023-07-02'),
-      published: true
-    },
-    {
-      name: 'Citrix Cloud',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Hold,
-      description: 'Cloud services from Citrix that focus on virtual applications and desktops.',
-      publishedAt: new Date('2023-07-03'),
-      published: true
-    },
-    {
-      name: 'Rackspace Managed Cloud',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Hold,
-      description: 'Managed cloud services with a focus on enterprise solutions.',
-      publishedAt: new Date('2023-07-04'),
       published: true
     },
     {
@@ -318,22 +149,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       published: true
     },
     {
-      name: 'Google Anthos',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Trial,
-      description: 'Manage hybrid and multi-cloud environments with Anthos.',
-      publishedAt: null,
-      published: false
-    },
-    {
-      name: 'AWS Outposts',
-      category: TechnologyCategory.Platforms,
-      maturity: TechnologyMaturity.Trial,
-      description: 'Extend AWS infrastructure and services to on-premise locations.',
-      publishedAt: new Date('2023-08-04'),
-      published: true
-    },
-    {
       name: 'Serverless Platforms',
       category: TechnologyCategory.Platforms,
       maturity: TechnologyMaturity.Trial,
@@ -357,22 +172,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       maturity: TechnologyMaturity.Adopt,
       description: 'The leading container orchestration system.',
       publishedAt: new Date('2023-09-02'),
-      published: true
-    },
-    {
-      name: 'Git',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'The most widely used distributed version control system.',
-      publishedAt: new Date('2023-09-03'),
-      published: true
-    },
-    {
-      name: 'Jenkins',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'An automation server for continuous integration and delivery.',
-      publishedAt: new Date('2023-09-04'),
       published: true
     },
     {
@@ -409,22 +208,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2023-10-03'),
       published: true
     },
-    {
-      name: 'Grafana',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Assess,
-      description: 'Visualization and analytics software for monitoring metrics.',
-      publishedAt: new Date('2023-10-04'),
-      published: true
-    },
-    {
-      name: 'ELK Stack',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Assess,
-      description: 'A combination of Elasticsearch, Logstash, and Kibana for log analysis.',
-      publishedAt: new Date('2023-10-05'),
-      published: true
-    },
 
     // --- Tools - Hold
     {
@@ -441,22 +224,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       maturity: TechnologyMaturity.Hold,
       description: 'An older automation platform for infrastructure configuration.',
       publishedAt: new Date('2023-11-02'),
-      published: true
-    },
-    {
-      name: 'Ant',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Hold,
-      description: 'A Java-based build tool that has been superseded by more modern solutions.',
-      publishedAt: new Date('2023-11-04'),
-      published: true
-    },
-    {
-      name: 'Nagios',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Hold,
-      description: 'A monitoring system that has given way to newer tools.',
-      publishedAt: new Date('2023-11-05'),
       published: true
     },
 
@@ -485,22 +252,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2023-12-03'),
       published: true
     },
-    {
-      name: 'Helm',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Trial,
-      description: 'A package manager for Kubernetes applications.',
-      publishedAt: new Date('2023-12-04'),
-      published: true
-    },
-    {
-      name: 'SonarQube',
-      category: TechnologyCategory.Tools,
-      maturity: TechnologyMaturity.Trial,
-      description: 'A tool for continuous code quality inspection and security analysis.',
-      publishedAt: new Date('2023-12-05'),
-      published: true
-    },
 
     // --- LanguagesAndFrameworks - Adopt
     {
@@ -520,14 +271,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       published: true
     },
     {
-      name: 'Vue.js',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'A progressive JavaScript framework for building modern interfaces.',
-      publishedAt: new Date('2024-01-03'),
-      published: true
-    },
-    {
       name: 'Node.js',
       category: TechnologyCategory.LanguagesAndFrameworks,
       maturity: TechnologyMaturity.Adopt,
@@ -535,32 +278,9 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2024-01-04'),
       published: true
     },
-    {
-      name: 'Spring Boot',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Adopt,
-      description: 'Simplify Java development with convention-over-configuration.',
-      publishedAt: new Date('2024-01-05'),
-      published: true
-    },
 
     // --- LanguagesAndFrameworks - Assess
-    {
-      name: 'Svelte',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Assess,
-      description: 'A compiler that generates highly efficient JavaScript code.',
-      publishedAt: new Date('2024-02-01'),
-      published: true
-    },
-    {
-      name: 'Flutter',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Assess,
-      description: 'A UI toolkit for building natively compiled applications for mobile, web, and desktop.',
-      publishedAt: new Date('2024-02-02'),
-      published: true
-    },
+
     {
       name: 'Next.js',
       category: TechnologyCategory.LanguagesAndFrameworks,
@@ -569,32 +289,8 @@ export function getSampleTechnologies(): TechnologyDTO[] {
       publishedAt: new Date('2024-02-03'),
       published: true
     },
-    {
-      name: 'Quarkus',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Assess,
-      description: 'A Kubernetes-native Java framework tailored for GraalVM and OpenJDK HotSpot.',
-      publishedAt: new Date('2024-02-05'),
-      published: true
-    },
 
     // --- LanguagesAndFrameworks - Hold
-    {
-      name: 'Backbone.js',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Hold,
-      description: 'An early MVC framework for structuring JavaScript applications.',
-      publishedAt: new Date('2024-03-01'),
-      published: true
-    },
-    {
-      name: 'jQuery',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Hold,
-      description: 'A fast, small, and feature-rich JavaScript library that has fallen out of favor.',
-      publishedAt: new Date('2024-03-02'),
-      published: true
-    },
     {
       name: 'Perl',
       category: TechnologyCategory.LanguagesAndFrameworks,
@@ -605,22 +301,6 @@ export function getSampleTechnologies(): TechnologyDTO[] {
     },
 
     // --- LanguagesAndFrameworks - Trial
-    {
-      name: 'SvelteKit',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Trial,
-      description: 'The official framework for building Svelte applications.',
-      publishedAt: new Date('2024-04-01'),
-      published: true
-    },
-    {
-      name: 'Remix',
-      category: TechnologyCategory.LanguagesAndFrameworks,
-      maturity: TechnologyMaturity.Trial,
-      description: 'A full stack web framework for building dynamic and performant web applications.',
-      publishedAt: new Date('2024-04-02'),
-      published: true
-    },
     {
       name: 'Nuxt.js',
       category: TechnologyCategory.LanguagesAndFrameworks,

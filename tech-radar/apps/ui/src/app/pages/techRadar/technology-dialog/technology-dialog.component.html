@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>
-  @if (mode === TechnologyDialogMode.CREATE){
+  @if (mode === TechnologyDialogMode.CREATE) {
     Create Technology
   }
-  @if (mode === TechnologyDialogMode.EDIT){
+  @if (mode === TechnologyDialogMode.EDIT) {
     Edit Technology
   }
-  @if (mode === TechnologyDialogMode.CHANGE_MATURITY){
+  @if (mode === TechnologyDialogMode.CHANGE_MATURITY) {
     Change Maturity
   }
 </h1>
@@ -52,9 +52,12 @@
 </div>
 <div mat-dialog-actions>
   @if (mode === TechnologyDialogMode.CREATE) {
-    <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!editForm.valid">Save Draft</button>
+    <span [matTooltip]="!editForm.valid ? 'All fields must be filled' : ''"
+          matTooltipPosition="above">
+      <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!editForm.valid">Save Draft</button>
+    </span>
     <span
-      [matTooltip]="!editForm.valid ? 'Description must be filled out in order to save and publish' : ''"
+      [matTooltip]="!editForm.valid ? 'All fields must be filled' : ''"
       matTooltipPosition="above">
       <button mat-button color="primary" (click)="onSave()"
               [disabled]="isDescriptionEmpty() || !editForm.valid">
