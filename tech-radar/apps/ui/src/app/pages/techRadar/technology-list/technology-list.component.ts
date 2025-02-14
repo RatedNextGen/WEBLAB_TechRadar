@@ -123,7 +123,7 @@ export class TechnologyListComponent implements OnInit {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       element.classList.add('highlight');
-      setTimeout(() => element.classList.remove('highlight'), 2000);
+      setTimeout(() => element.classList.remove('highlight'), 1000);
     }
   }
 

@@ -1,11 +1,11 @@
 .radar-container {
   background-color: #222E50;
-  display: flex;
-  align-items: center;
-  height: 100%;
+  padding: 20px;
 
   .chart {
     width: 100%;
     height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
   }
 }

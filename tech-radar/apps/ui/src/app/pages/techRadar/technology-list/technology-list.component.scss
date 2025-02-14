@@ -2,47 +2,44 @@
   padding: 1rem;
   max-height: calc(100vh - 80px);
   overflow-y: auto;
-  .category-container{
+
+  .category-container {
     display: flex;
     margin: 20px;
     gap: 1rem;
+
     .category-title {
       font-weight: bold;
       font-size: 1.2rem;
     }
 
+    .tech-item-container {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 1rem;
+      max-width: 25%;
+
+      .draft-title {
+        color: red;
+      }
+
+      .item-title {
+        font-size: 0.75rem;
+      }
+
+      .item-body {
+        font-size: 0.75rem;
+      }
+
+      .item-footer {
+        padding: 0.75rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
   }
-  .tech-item-container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 1rem;
-    max-width: 25%;
-  }
-
-  .draft-title {
-    color: red;
-  }
-
-}
-
-.item-title {
-  font-size: 0.75rem;
-}
-
-.item-body {
-  font-size: 0.75rem;
-}
-
-.item-footer {
-  padding: 0.75rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.tech-item {
-  transition: background-color 0.3s ease;
 }
 
 .highlight {

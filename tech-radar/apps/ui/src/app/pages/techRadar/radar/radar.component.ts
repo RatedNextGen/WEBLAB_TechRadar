@@ -45,12 +45,21 @@ export class RadarComponent implements OnInit {
   }
 
   private createSvg(): void {
-    this.svg = d3.select(this.chartContainer.nativeElement)
+    const container = this.chartContainer.nativeElement;
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+
+    const padding = 20;
+    this.width = containerWidth;
+    this.height = containerHeight;
+    this.radius = Math.min(containerWidth, containerHeight) / 2 - this.margin - padding;
+
+    this.svg = d3.select(container)
       .append('svg')
-      .attr('width', this.width)
-      .attr('height', this.height)
+      .attr('width', containerWidth)
+      .attr('height', containerHeight)
       .append('g')
-      .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
+      .attr('transform', `translate(${containerWidth / 2}, ${containerHeight / 2})`);
   }
 
   private drawRadar(): void {
