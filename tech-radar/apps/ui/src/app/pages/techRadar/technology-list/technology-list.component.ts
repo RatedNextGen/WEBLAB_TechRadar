@@ -14,19 +14,22 @@ import { MatCard, MatCardContent, MatCardFooter, MatCardHeader } from '@angular/
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  TechnologyDialogMode,
+  SaveActionType,
   TechnologyDialogComponent,
-  TechnologyDialogData, TechnologyDialogResult, SaveActionType
+  TechnologyDialogMode,
+  TechnologyDialogResult
 } from '../technology-dialog/technology-dialog.component';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatButton } from '@angular/material/button';
 
 interface GroupedTechnologies {
   category: TechnologyCategory;
-  maturities: {
-    maturity: TechnologyMaturity;
-    items: TechnologyDTO[];
-  }[];
+  maturities: Maturities[];
+}
+
+interface Maturities {
+  maturity: TechnologyMaturity | string;
+  items: TechnologyDTO[];
 }
 
 @Component({
@@ -48,33 +51,13 @@ export class TechnologyListComponent implements OnInit {
   ngOnInit(): void {
     this.groupedTechnologies$ = this.technologyService.technologies$.pipe(
       map((technologies: TechnologyDTO[]) => {
+        // Gruppiere alle Technologien nach Kategorie
+        const categoryGroups = this.groupByCategory(technologies);
 
-        const categoryGroups: { [key: string]: TechnologyDTO[] } = technologies.reduce((acc, tech) => {
-          if (!acc[tech.category]) {
-            acc[tech.category] = [];
-          }
-          acc[tech.category].push(tech);
-          return acc;
-        }, {} as { [key: string]: TechnologyDTO[] });
-
+        // Für jede Kategorie: Gruppiere nach Maturity, inklusive eines Default-Werts
         return categoryOrder.map(category => {
           const itemsInCategory = categoryGroups[category] || [];
-
-          const maturityGroups: { [key: string]: TechnologyDTO[] } = itemsInCategory.reduce((acc, tech) => {
-            if (!acc[tech.maturity]) {
-              acc[tech.maturity] = [];
-            }
-            acc[tech.maturity].push(tech);
-            return acc;
-          }, {} as { [key: string]: TechnologyDTO[] });
-
-          const groupedMaturities = maturityOrder
-            .map(maturity => ({
-              maturity,
-              items: maturityGroups[maturity] || []
-            }))
-            .filter(group => group.items.length > 0);
-
+          const groupedMaturities = this.groupByMaturity(itemsInCategory, 'UNCATEGORIZED');
           return { category, maturities: groupedMaturities };
         });
       })
@@ -110,7 +93,7 @@ export class TechnologyListComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-        this.handleUpdate(result);
+      this.handleUpdate(result);
     });
   }
 
@@ -141,7 +124,7 @@ export class TechnologyListComponent implements OnInit {
   }
 
   private handleUpdate(result: TechnologyDialogResult) {
-    if (!result){
+    if (!result) {
       return;
     }
     const { action, data } = result;
@@ -159,6 +142,37 @@ export class TechnologyListComponent implements OnInit {
         this.technologyService.updateDraft(data).subscribe();
       }
     }
+  }
+
+  private groupByCategory(technologies: TechnologyDTO[]): { [category: string]: TechnologyDTO[] } {
+    return technologies.reduce((acc, tech) => {
+      const category = tech.category;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(tech);
+      return acc;
+    }, {} as Record<string, TechnologyDTO[]>);
+  }
+
+  private groupByMaturity(items: TechnologyDTO[], defaultMaturity: string): Maturities[] {
+    const maturityGroups = items.reduce((acc, tech) => {
+      const key = tech.maturity ? tech.maturity : defaultMaturity;
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(tech);
+      return acc;
+    }, {} as Record<string, TechnologyDTO[]>);
+
+    const extendedMaturityOrder = [...maturityOrder, defaultMaturity];
+
+    return extendedMaturityOrder
+      .map(maturityKey => ({
+        maturity: maturityKey,
+        items: maturityGroups[maturityKey] || []
+      }))
+      .filter(group => group.items.length > 0);
   }
 }
 

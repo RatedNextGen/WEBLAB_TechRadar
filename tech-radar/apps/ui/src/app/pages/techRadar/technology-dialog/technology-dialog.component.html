@@ -1,16 +1,6 @@
-<h1 mat-dialog-title>
-  @if (mode === TechnologyDialogMode.CREATE) {
-    Create Technology
-  }
-  @if (mode === TechnologyDialogMode.EDIT) {
-    Edit Technology
-  }
-  @if (mode === TechnologyDialogMode.CHANGE_MATURITY) {
-    Change Maturity
-  }
-</h1>
+<h1 mat-dialog-title>{{ title }}</h1>
 <div mat-dialog-content>
-  <form [formGroup]="editForm">
+  <form [formGroup]="form">
     <mat-form-field class="full-width">
       <label>Name</label>
       <input matInput formControlName="name" />
@@ -52,31 +42,28 @@
 </div>
 <div mat-dialog-actions>
   @if (mode === TechnologyDialogMode.CREATE) {
-    <span [matTooltip]="!editForm.valid ? 'All fields must be filled' : ''"
-          matTooltipPosition="above">
-      <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!editForm.valid">Save Draft</button>
-    </span>
+    <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!isDraftValid">Save Draft</button>
     <span
-      [matTooltip]="!editForm.valid ? 'All fields must be filled' : ''"
+      [matTooltip]="!form.valid ? 'All fields must be filled' : ''"
       matTooltipPosition="above">
       <button mat-button color="primary" (click)="onSave()"
-              [disabled]="isDescriptionEmpty() || !editForm.valid">
+              [disabled]="isDescriptionEmpty() || !form.valid">
         Save and Publish
       </button>
     </span>
   } @else {
     @if (!isPublished) {
-      <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!editForm.valid">Save Draft</button>
+      <button mat-button color="secondary" (click)="onSaveDraft()" [disabled]="!form.valid">Save Draft</button>
       <span
         [matTooltip]="isDescriptionEmpty() ? 'Description must be filled out in order to save and publish' : ''"
         matTooltipPosition="above">
       <button mat-button color="primary" (click)="onSave()"
-              [disabled]="isDescriptionEmpty() || !editForm.valid">
+              [disabled]="isDescriptionEmpty() || !form.valid">
         Save and Publish
       </button>
     </span>
     } @else {
-      <button mat-button color="primary" (click)="onSave()" [disabled]="!editForm.valid">Save</button>
+      <button mat-button color="primary" (click)="onSave()" [disabled]="!form.valid">Save</button>
     }
   }
   <button mat-button (click)="onCancel()">Cancel</button>

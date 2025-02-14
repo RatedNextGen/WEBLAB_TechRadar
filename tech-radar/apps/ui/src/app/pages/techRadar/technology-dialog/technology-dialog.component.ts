@@ -58,7 +58,7 @@ export class TechnologyDialogComponent {
   protected readonly TechnologyCategory = TechnologyCategory;
   protected readonly TechnologyMaturity = TechnologyMaturity;
   protected readonly TechnologyDialogMode = TechnologyDialogMode;
-  editForm: FormGroup;
+  form: FormGroup;
   isPublished: boolean = false;
   mode: TechnologyDialogMode;
 
@@ -67,26 +67,29 @@ export class TechnologyDialogComponent {
               @Inject(MAT_DIALOG_DATA) public data: TechnologyDialogData) {
     this.mode = data.mode;
     this.isPublished = this.data.technology.published;
-    this.editForm = this.initializeForm(data.technology);
+    this.form = this.initializeForm(data.technology);
   }
 
-  private initializeForm(data: TechnologyDTO) {
-    if (this.mode === TechnologyDialogMode.CHANGE_MATURITY) {
-      return this.createChangeMaturityForm(data);
+  get title(): string {
+    switch (this.mode) {
+      case TechnologyDialogMode.CREATE:
+        return 'Create Technology';
+      case TechnologyDialogMode.EDIT:
+        return 'Edit Technology';
+      case TechnologyDialogMode.CHANGE_MATURITY:
+        return 'Change Maturity';
+      default:
+        return '';
     }
-    if (this.mode === TechnologyDialogMode.EDIT) {
-      if (this.isPublished) {
-        return this.createFormForPublished(data);
-      } else {
-        return this.createDraftForm(data);
-      }
-    }
-    return this.createEmptyForm();
+  }
+
+  get isDraftValid(): boolean {
+    return !this.isPublished && <boolean>this.form.get('name')?.valid && <boolean>this.form.get('category')?.valid;
   }
 
   onSave(): void {
-    if (this.editForm.valid) {
-      const updatedTech = { ...this.data.technology, ...this.editForm.value };
+    if (this.form.valid) {
+      const updatedTech = { ...this.data.technology, ...this.form.value };
       this.dialogRef.close({
         action: SaveActionType.PUBLISH,
         data: updatedTech
@@ -95,8 +98,8 @@ export class TechnologyDialogComponent {
   }
 
   onSaveDraft(): void {
-    if (this.editForm.valid) {
-      const updatedTech = { ...this.data.technology, ...this.editForm.value };
+    if (this.isDraftValid) {
+      const updatedTech = { ...this.data.technology, ...this.form.value };
       this.dialogRef.close({
         action: SaveActionType.DRAFT,
         data: updatedTech
@@ -109,17 +112,35 @@ export class TechnologyDialogComponent {
   }
 
   isDescriptionEmpty(): boolean {
-    const value = this.editForm.get('description')?.value;
+    const value = this.form.get('description')?.value;
     return !value || value.trim().length === 0;
+  }
+
+  private initializeForm(data: TechnologyDTO) {
+    if (this.mode === TechnologyDialogMode.CHANGE_MATURITY) {
+      console.log('create maturity form');
+      return this.createChangeMaturityForm(data);
+    }
+    if (this.mode === TechnologyDialogMode.EDIT) {
+      if (this.isPublished) {
+        console.log('create published form');
+        return this.createFormForPublished(data);
+      } else {
+        console.log('create draft form');
+        return this.createDraftForm(data);
+      }
+    }
+    console.log('create empty form');
+    return this.createEmptyForm();
   }
 
 
   private createEmptyForm() {
     return this.fb.group({
-      name: ['', Validators.required],
-      category: [[], Validators.required],
-      maturity: [[], Validators.required],
-      description: ['', Validators.required]
+      name: [null, Validators.required],
+      category: [null, Validators.required],
+      maturity: [null, Validators.required],
+      description: [null, Validators.required]
     });
   }
 
