@@ -5,7 +5,7 @@ import {
 } from '../../../../shared/src/lib/models/technology.model';
 
 // generated technologies sourced from chatgpt
-export function getSampleTechnologies(): TechnologyDTO[] {
+export function sampleTechnologies(): TechnologyDTO[] {
   return [
     {
       name: 'Microservices',

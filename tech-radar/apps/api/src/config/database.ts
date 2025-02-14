@@ -4,7 +4,7 @@ import { UserModel } from './user.schema';
 import { UserRole } from '../../../../shared/src/lib/models/user.model';
 import bcrypt from 'bcrypt';
 import { TechnologyModel } from './technology.schema';
-import { getSampleTechnologies } from './getSampleTechnologies';
+import { sampleTechnologies } from './sampleTechnologies';
 
 export const connectDB = async () => {
   try {
@@ -58,7 +58,7 @@ const resetTechnologies = async () => {
     logger.info('Drop all technologies');
     await TechnologyModel.deleteMany({});
 
-    const technologies = getSampleTechnologies();
+    const technologies = sampleTechnologies();
 
     await TechnologyModel.insertMany(technologies);
     logger.info('Technology added successfully');

@@ -96,16 +96,41 @@ export class TechnologyService {
   }
 
   private validateTechnology(technology: Partial<TechnologyDTO>) {
-    if (technology.published && (!technology.description || !technology.maturity)) {
-      throw new ValidationError("Description and maturity are required when publishing a technology.");
+    if (!technology.name || technology.name.trim() === "") {
+      throw new ValidationError("Name is required.");
+    }
+    if (!technology.category) {
+      throw new ValidationError("Category is required.");
+    }
+    if (!Object.values(TechnologyCategory).includes(technology.category)) {
+      throw new ValidationError(
+        `Invalid category: "${technology.category}". Allowed values: ${Object.values(TechnologyCategory).join(", ")}`
+      );
     }
 
-    if (technology.category && !Object.values(TechnologyCategory).includes(technology.category)) {
-      throw new ValidationError(`Invalid category: "${technology.category}". Allowed values: ${Object.values(TechnologyCategory).join(", ")}`);
+    if (technology.published) {
+      if (!technology.maturity) {
+        throw new ValidationError("Maturity is required when publishing a technology.");
+      }
+      if (!Object.values(TechnologyMaturity).includes(technology.maturity)) {
+        this.throwMaturityInvalidError(technology);
+      }
+      if (!technology.description || technology.description.trim() === "") {
+        throw new ValidationError("Description is required when publishing a technology.");
+      }
+    } else {
+      if (technology.maturity && !Object.values(TechnologyMaturity).includes(technology.maturity)) {
+        this.throwMaturityInvalidError(technology);
+      }
+      if (technology.description && technology.description.trim() === "") {
+        throw new ValidationError("If provided, description must not be empty.");
+      }
     }
+  }
 
-    if (technology.maturity && !Object.values(TechnologyMaturity).includes(technology.maturity)) {
-      throw new ValidationError(`Invalid maturity: "${technology.maturity}". Allowed values: ${Object.values(TechnologyMaturity).join(", ")}`);
-    }
+  private throwMaturityInvalidError(technology: Partial<TechnologyDTO>) {
+    throw new ValidationError(
+      `Invalid maturity: "${technology.maturity}". Allowed values: ${Object.values(TechnologyMaturity).join(', ')}`
+    );
   }
 }
