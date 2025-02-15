@@ -40,7 +40,7 @@ describe("UserService - Login", () => {
     expect(mockUserRepository.findByEmail).toHaveBeenCalledWith("test@example.com");
     expect(mockUser.comparePassword).toHaveBeenCalledWith("password123");
     expect(generateToken).toHaveBeenCalledWith({ email: "test@example.com", role: "CTO" });
-    expect(result).toEqual({ token: "mocked-token" });
+    expect(result).toEqual("mocked-token");
   });
 
   it("should log the login when a CTO logs on", async () => {

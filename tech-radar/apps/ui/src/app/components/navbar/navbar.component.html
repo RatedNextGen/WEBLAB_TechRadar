@@ -1,5 +1,7 @@
 <ul>
   <li><span class="greeting">Hallo {{ userRole }}!</span></li>
-  <li (click)="createNewTechnology()"><span>Add Technology</span></li>
+  @if (canAdministrate){
+    <li data-test-id="create-new-technology" (click)="createNewTechnology()"><span>Add Technology</span></li>
+  }
   <li class="logout"><a [routerLink]="'logout'">Logout</a></li>
 </ul>

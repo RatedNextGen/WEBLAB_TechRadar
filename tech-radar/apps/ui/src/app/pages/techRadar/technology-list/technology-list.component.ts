@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, OnInit, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyService } from '../../../services/technology.service';
 import {
@@ -46,7 +46,6 @@ interface Maturities {
 export class TechnologyListComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   @Input() canAdministrate: boolean = false;
-  readonly panelOpenState = signal(false);
   groupedTechnologies$!: Observable<GroupedTechnologies[]>;
 
   constructor(private technologyService: TechnologyService) {
@@ -55,10 +54,8 @@ export class TechnologyListComponent implements OnInit {
   ngOnInit(): void {
     this.groupedTechnologies$ = this.technologyService.technologies$.pipe(
       map((technologies: TechnologyDTO[]) => {
-        // Gruppiere alle Technologien nach Kategorie
         const categoryGroups = this.groupByCategory(technologies);
 
-        // Für jede Kategorie: Gruppiere nach Maturity, inklusive eines Default-Werts
         return categoryOrder.map(category => {
           const itemsInCategory = categoryGroups[category] || [];
           const groupedMaturities = this.groupByMaturity(itemsInCategory, 'UNCATEGORIZED');

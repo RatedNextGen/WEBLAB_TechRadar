@@ -18,4 +18,10 @@ export class NavbarComponent{
   createNewTechnology() {
     this.createNewTechnologyClicked.emit();
   }
+
+  get canAdministrate(){
+    return this.userRole == UserRole.CTO || this.userRole === UserRole.TECH_LEAD
+  }
+
+  protected readonly UserRole = UserRole;
 }
