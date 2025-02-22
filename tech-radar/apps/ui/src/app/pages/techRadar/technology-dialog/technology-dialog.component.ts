@@ -19,28 +19,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormField } from '@angular/material/
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatTooltip } from '@angular/material/tooltip';
+import { SaveActionType, TechnologyDialogData, TechnologyDialogMode } from './technology-dialog.types';
 
-export enum SaveActionType {
-  PUBLISH = 'save',
-  DRAFT = 'draft',
-  CANCEL = 'cancel',
-}
-
-export interface TechnologyDialogData {
-  technology: TechnologyDTO;
-  mode: TechnologyDialogMode;
-}
-
-export interface TechnologyDialogResult {
-  action: SaveActionType,
-  data: TechnologyDTO
-}
-
-export enum TechnologyDialogMode {
-  CREATE = 'create',
-  EDIT = 'edit',
-  CHANGE_MATURITY = 'changeMaturity',
-}
 
 @Component({
   selector: 'app-technology-edit',
