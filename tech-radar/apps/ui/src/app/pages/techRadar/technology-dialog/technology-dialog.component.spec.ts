@@ -20,7 +20,6 @@ describe('TechnologyDialogComponent', () => {
     _id: '2',
     name: 'Draft Tech',
     category: TechnologyCategory.Tools,
-    maturity: '',
     description: '',
     published: false,
     publishedAt: null,
