@@ -23,14 +23,19 @@ jobs:
         with:
           node-version: 22.14.0
           cache: 'npm'
+          cache-dependency-path: ./tech-radar/package-lock.json
 
       - name: Install Dependencies
+        working-directory: tech-radar
         run: npm ci
 
       - name: Build Frontend & Backend
+        working-directory: tech-radar
         run: npx nx run-many --target=build --all --configuration=production
       - name: Test Frontend & Backend
+        working-directory: tech-radar
         run: npx nx run-many --target=test --all --codeCoverage
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
