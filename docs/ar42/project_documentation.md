@@ -346,6 +346,7 @@ Dies erhöht die Wartbarkeit, da Services unabhängig voneinander getestet und e
 | T1 | Unvollständige Testabdeckung   | Niedrige Code-Coverage kann zu unerwarteten Fehlern in Produktion führen.                                               | Unit- und Integrationstests weiter ausbauen, Ziel: 80% Code-Coverage. (aktuell 68%)              |
 | T2 | Kein E2E-Tests                 | Mögliche unerwartete Fehler im Zusammenspiel von UI, API und Datenbank, die erst in Produktion entdeckt werden.         | Einführung von E2E-Tests zur Sicherstellung von Use-Cases und zur frühzeitigen Fehlererkennung.  |
 | T3 | Keine Controller-Service-Tests | Schnittstellen zwischen Controller und Service könnten ungetestete Fehler enthalten, was zu unerwarteten Fehlern führt. | Implementierung von Integrations-Tests zur Stabilitätssicherung zwischen Controller und Service. |
+| T3 | @ts-ignore                     | Kann zu unerwarteten Fehlern führen                                                                                     | Typescript Fehlermeldungen beheben und Typescript-Standards folgen (aktuell 5.Stück)             |
 
 ## Massnahmen
 Für eine lokale Entwicklung ist die Applikation nicht schlecht, jedoch müssten noch die Risiken und Tech-Depth mitigiert und das CI/CD erweitert werden damit es produktionsreif ist

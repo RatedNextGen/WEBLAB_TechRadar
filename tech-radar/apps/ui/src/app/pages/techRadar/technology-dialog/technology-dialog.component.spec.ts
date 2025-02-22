@@ -1,15 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  SaveActionType,
   TechnologyDialogComponent,
-  TechnologyDialogData,
-  TechnologyDialogMode
 } from './technology-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TechnologyCategory, TechnologyDTO } from '../../../../../../../shared/src/lib/models/technology.model';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SaveActionType, TechnologyDialogData, TechnologyDialogMode } from './technology-dialog.types';
 
 describe('TechnologyDialogComponent', () => {
   let component: TechnologyDialogComponent;
@@ -17,11 +15,11 @@ describe('TechnologyDialogComponent', () => {
   let dialogRefMock: Partial<MatDialogRef<TechnologyDialogComponent>>;
 
 
+  // @ts-ignore
   const draftTech: TechnologyDTO = {
     _id: '2',
     name: 'Draft Tech',
     category: TechnologyCategory.Tools,
-    // @ts-ignore
     maturity: '',
     description: '',
     published: false,
