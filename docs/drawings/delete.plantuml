@@ -1,0 +1,15 @@
+@startuml
+actor "CTO/TechLead"
+participant "Tech Radar UI" as UI
+participant "Tech Radar API" as API
+participant "Tech Radar Database" as DB
+
+"CTO/TechLead" -> UI : Delete an Entry
+UI -> API : DELETE /technologies/:id
+API -> API : Check if user is authorized
+API -> DB : Check if entry exist
+DB --> API:
+API -> DB : Delete Entry
+DB --> API : Return code
+API --> UI : Return empty success message
+@enduml

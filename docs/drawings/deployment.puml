@@ -1,0 +1,21 @@
+@startuml
+skinparam componentStyle uml2
+
+node "Dev Notebook" {
+  component "Browser" as Browser
+
+  package "UI Webserver" {
+    component "Tech Radar UI" as UI
+  }
+  package "API Webserver" {
+    component "Tech Radar API" as API
+  }
+  package "Docker Container" {
+    database "DB" as DB
+  }
+}
+
+Browser --> UI : http://localhost:4200
+UI --> API : http://localhost:8080/api
+API --> DB : mongodb://localhost:27017/technologyRadar
+@enduml

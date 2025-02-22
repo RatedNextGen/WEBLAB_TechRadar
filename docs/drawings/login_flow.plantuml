@@ -1,0 +1,18 @@
+@startuml
+actor User
+participant "Tech Radar UI" as UI
+participant "Tech Radar API" as API
+participant "Tech Radar Database" as DB
+
+User -> UI : Open application and login
+UI -> API : POST /login (with credentials)
+API --> UI : Return JWT -> Store in cookie
+UI -> API : GET /auth/tokenInfo (with cookie)
+API --> UI : Return user role & token info
+UI -> UI : Cache authentication details
+UI -> API : GET /technologies (with credentials)
+API -> DB : Get published entries (if admin get all entries)
+DB --> API : Return entries
+API --> UI : Return technologies
+User -> UI : Interact with radar visualization
+@enduml

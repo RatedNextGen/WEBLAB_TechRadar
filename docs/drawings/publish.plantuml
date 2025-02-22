@@ -1,0 +1,16 @@
+@startuml
+actor "CTO/TechLead"
+participant "Tech Radar UI" as UI
+participant "Tech Radar API" as API
+participant "Tech Radar Database" as DB
+
+"CTO/TechLead" -> UI : Publish a draft entry
+UI -> API : PUT /technologies/draft/:id/publish
+API -> API : Check if user is authorized
+API -> API: Validate Input
+API -> DB : Check if entry exist
+DB --> API:
+API -> DB : Update Entry
+DB --> API : Return updated Entry
+API --> UI : Return updated Entry
+@enduml
