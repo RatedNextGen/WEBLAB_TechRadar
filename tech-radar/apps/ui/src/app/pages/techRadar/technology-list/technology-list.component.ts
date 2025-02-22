@@ -14,16 +14,18 @@ import { MatCard, MatCardContent, MatCardFooter, MatCardHeader } from '@angular/
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  SaveActionType,
-  TechnologyDialogComponent,
-  TechnologyDialogMode,
-  TechnologyDialogResult
+  TechnologyDialogComponent
 } from '../technology-dialog/technology-dialog.component';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatButton } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDivider } from '@angular/material/divider';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import {
+  SaveActionType,
+  TechnologyDialogMode,
+  TechnologyDialogResult
+} from '../technology-dialog/technology-dialog.types';
 
 interface GroupedTechnologies {
   category: TechnologyCategory;
