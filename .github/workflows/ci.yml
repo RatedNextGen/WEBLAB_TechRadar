@@ -40,4 +40,4 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: tech-radar/coverage/clover.xml
+          files: tech-radar/api/icov.info,tech-radar/ui/icov.info,tech-radar/shared/icov.info
