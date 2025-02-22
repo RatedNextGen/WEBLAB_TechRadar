@@ -10,10 +10,9 @@ import { TechnologyService } from '../../services/technology.service';
 import { TechnologyDTO } from '../../../../../../shared/src/lib/models/technology.model';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  TechnologyDialogMode,
   TechnologyDialogComponent,
-  SaveActionType
 } from './technology-dialog/technology-dialog.component';
+import { SaveActionType, TechnologyDialogMode } from './technology-dialog/technology-dialog.types';
 
 @Component({
   selector: 'app-tech-radar',
