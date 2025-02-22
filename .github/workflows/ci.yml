@@ -38,5 +38,6 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
+        working-directory: tech-radar
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
