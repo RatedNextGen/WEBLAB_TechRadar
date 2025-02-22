@@ -46,3 +46,14 @@
 .highlight {
   background-color: rgba(255, 255, 0, 0.3);
 }
+
+@media (max-width: 2*768px) {
+  .category-container {
+    flex-direction: column;
+
+    .tech-item-container {
+      max-width: 100% !important;
+      flex: 1 1 100%;
+    }
+  }
+}

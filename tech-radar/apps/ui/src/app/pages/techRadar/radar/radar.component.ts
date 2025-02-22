@@ -1,13 +1,13 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as d3 from 'd3';
+import { Observable } from 'rxjs';
+import { TechnologyService } from '../../../services/technology.service';
 import {
   TechnologyCategory,
   TechnologyDTO,
   TechnologyMaturity
 } from '../../../../../../../shared/src/lib/models/technology.model';
-import { Observable } from 'rxjs';
-import { TechnologyService } from '../../../services/technology.service';
 import { categoryOrder, maturityOrder } from '../../utils/constants';
 
 @Component({
@@ -23,8 +23,8 @@ export class RadarComponent implements OnInit {
   technologies$!: Observable<TechnologyDTO[]>;
 
   private svg: any;
-  private width = 800;
-  private height = 800;
+  private width!: number;
+  private height!: number;
   private margin = 20;
   private radius!: number;
   private itemsGroup: any;
@@ -32,11 +32,19 @@ export class RadarComponent implements OnInit {
   constructor(private technologyService: TechnologyService) { }
 
   ngOnInit(): void {
-    this.radius = Math.min(this.width, this.height) / 2 - this.margin;
+    this.init();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.init();
+  }
+
+  private init() {
+    this.updateDimensions();
     this.createSvg();
     this.drawRadar();
     this.itemsGroup = this.svg.append('g').attr('class', 'items-group');
-
 
     this.technologies$ = this.technologyService.technologies$;
     this.technologies$.subscribe((technologies: TechnologyDTO[]) => {
@@ -44,22 +52,23 @@ export class RadarComponent implements OnInit {
     });
   }
 
+  private updateDimensions(): void {
+    const container = this.chartContainer.nativeElement;
+    this.width = container.clientWidth;
+    this.height = container.clientHeight;
+    this.radius = Math.min(this.width, this.height) / 2 - this.margin;
+  }
+
   private createSvg(): void {
     const container = this.chartContainer.nativeElement;
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
-
-    const padding = 20;
-    this.width = containerWidth;
-    this.height = containerHeight;
-    this.radius = Math.min(containerWidth, containerHeight) / 2 - this.margin - padding;
+    d3.select(container).select('svg').remove(); // Remove old SVG on resize
 
     this.svg = d3.select(container)
       .append('svg')
-      .attr('width', containerWidth)
-      .attr('height', containerHeight)
+      .attr('width', this.width)
+      .attr('height', this.height)
       .append('g')
-      .attr('transform', `translate(${containerWidth / 2}, ${containerHeight / 2})`);
+      .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
   }
 
   private drawRadar(): void {
@@ -81,19 +90,6 @@ export class RadarComponent implements OnInit {
         .attr('x2', this.radius * Math.cos(angle))
         .attr('y2', this.radius * Math.sin(angle))
         .attr('stroke', '#fff');
-    }
-
-    for (let level = 0; level < levels; level++) {
-      const r = (this.radius / levels) * (level + 1);
-      this.svg.append('text')
-        .attr('x', 0)
-        .attr('y', -r)
-        .attr('dy', '4em')
-        .attr('dx', '2em')
-        .attr('text-anchor', 'middle')
-        .attr('font-size', '18px')
-        .attr('fill', '#fff')
-        .text(this.getMaturityLabel(level));
     }
 
     const labelOffset = 80;
@@ -120,22 +116,19 @@ export class RadarComponent implements OnInit {
   private drawItems(items: TechnologyDTO[]): void {
     const ringThickness = this.radius / maturityOrder.length;
     const placedPositions: { x: number; y: number }[] = [];
-    const circleRadius = 10; // radius of each circle
+    const circleRadius = 10;
 
     items.forEach(item => {
-      // Determine ring (maturity)
       const maturityIndex = maturityOrder.indexOf(item.maturity);
       if (maturityIndex < 0) { return; }
       const innerRadius = maturityIndex * ringThickness;
       const outerRadius = (maturityIndex + 1) * ringThickness;
 
-      // Determine quadrant (category)
       const categoryIndex = categoryOrder.indexOf(item.category);
       if (categoryIndex < 0) { return; }
       const angleSector = (2 * Math.PI) / categoryOrder.length;
       const startAngle = categoryIndex * angleSector;
 
-      // Find a non-overlapping position with up to 10 attempts
       let x: number, y: number;
       let attempt = 0;
       const maxAttempts = 10;
@@ -147,10 +140,8 @@ export class RadarComponent implements OnInit {
         attempt++;
       } while (this.overlaps(x, y, circleRadius, placedPositions) && attempt < maxAttempts);
 
-      // Save the position so subsequent items can check against it.
       placedPositions.push({ x, y });
 
-      // Append the circle and text
       this.itemsGroup.append('circle')
         .attr('cx', x)
         .attr('cy', y)
@@ -169,21 +160,6 @@ export class RadarComponent implements OnInit {
         .attr('font-size', '10px')
         .text(item.name);
     });
-  }
-
-  private getMaturityLabel(level: number): string {
-    switch (level) {
-      case 0:
-        return TechnologyMaturity.Adopt
-      case 1:
-        return TechnologyMaturity.Assess
-      case 2:
-        return TechnologyMaturity.Hold
-      case 3:
-        return TechnologyMaturity.Trial
-      default:
-        return '';
-    }
   }
 
   private getColourByMaturity(item: TechnologyDTO): string {

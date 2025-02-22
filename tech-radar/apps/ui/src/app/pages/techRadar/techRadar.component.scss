@@ -11,12 +11,17 @@
     width: 40%;
   }
 }
-@media (max-width: 768px) {
-  .radar-container {
-    display: none;
-  }
+@media (max-width: 926px) {
 
-  .list-container {
-    width: 100%;
+  .container {
+    width: 100wv;
+
+    .radar-container {
+      display: none;
+    }
+
+    .list-container {
+      width: 100%;
+    }
   }
 }

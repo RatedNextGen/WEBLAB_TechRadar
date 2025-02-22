@@ -322,12 +322,17 @@ Dies erhöht die Wartbarkeit, da Services unabhängig voneinander getestet und e
 
 # 10. Qualitätsanforderungen
 
-| Priorität | Merkmal                | Beschreibung                                                                                                                                      |
-|-----------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Hoch      | Sicherheit             | Die Anwendung nutzt JWT-Authentifizierung mit httpOnly-Cookies und RBAC. Alle sicherheitskritischen (Admin logins) Aktionen werden protokolliert. |
-| Hoch      | Wartbarkeit            | Durch die NX-Monorepo-Struktur, Dependency Injection und eine modulare Architektur ist die Wartung und Erweiterung der Anwendung einfach möglich. |
-| Mittel    | Performance            | Die Nutzung von optimierten Datenbankabfragen und authCaching im Frontend gewährleisten eine schnelle Applikation                                 |
-| Mittel    | Benutzerfreundlichkeit | Einfaches UI bei dem ein normaler User und ein Admin nur einen kleinen Unterschied macht in der Bedienung                                         |
+| Priorität | Merkmal                            | Beschreibung                                                                                                                                      |
+|-----------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Hoch      | Sicherheit                         | Die Anwendung nutzt JWT-Authentifizierung mit httpOnly-Cookies und RBAC. Alle sicherheitskritischen (Admin logins) Aktionen werden protokolliert. |
+| Hoch      | Wartbarkeit                        | Durch die NX-Monorepo-Struktur, Dependency Injection und eine modulare Architektur ist die Wartung und Erweiterung der Anwendung einfach möglich. |
+| Mittel    | Performance                        | Die Nutzung von optimierten Datenbankabfragen und authCaching im Frontend gewährleisten eine schnelle Applikation                                 |
+| Mittel    | Benutzerfreundlichkeit             | Einfaches UI bei dem ein normaler User und ein Admin nur einen kleinen Unterschied macht in der Bedienung                                         |
+| Hoch      | Benutzerfreundlichkeit             | Der Technologie-Radar-Viewer soll neben der Desktop-Ansicht, auch für die Mobile-Ansicht optimiert sein.                                          |
+| Hoch      | Benutzerfreundlichkeit/Performance | Der Technologie-Radar-Viewer soll innert 1s geladen sein.                                                                                         |
+| Hoch      | Sicherheit/Nachvollziehbarkeit     | Sämtliche Anmeldungen an die Technologie-Radar-Administration werden aufgezeichnet.                                                               |
+|
+|
 
 # 11. Risiken und technische Schulden
 

@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle
@@ -24,7 +23,7 @@ import { SaveActionType, TechnologyDialogData, TechnologyDialogMode } from './te
 
 @Component({
   selector: 'app-technology-edit',
-  imports: [CommonModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, MatFormField, MatSelect, MatOption, ReactiveFormsModule, MatInput, MatTooltip],
+  imports: [CommonModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatButtonModule, MatFormField, MatSelect, MatOption, ReactiveFormsModule, MatInput, MatTooltip],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } },

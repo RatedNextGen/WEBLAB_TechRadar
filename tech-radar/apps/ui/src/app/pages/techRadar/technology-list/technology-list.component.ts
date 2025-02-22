@@ -7,20 +7,14 @@ import {
   TechnologyMaturity
 } from '../../../../../../../shared/src/lib/models/technology.model';
 import { Observable } from 'rxjs';
-import { RadarComponent } from '../radar/radar.component';
 import { map } from 'rxjs/operators';
 import { categoryOrder, maturityOrder } from '../../utils/constants';
-import { MatCard, MatCardContent, MatCardFooter, MatCardHeader } from '@angular/material/card';
-import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  TechnologyDialogComponent
-} from '../technology-dialog/technology-dialog.component';
+import { TechnologyDialogComponent } from '../technology-dialog/technology-dialog.component';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatButton } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDivider } from '@angular/material/divider';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import {
   SaveActionType,
   TechnologyDialogMode,
@@ -39,7 +33,7 @@ interface Maturities {
 
 @Component({
   selector: 'app-technology-list',
-  imports: [CommonModule, RadarComponent, MatCard, MatCardHeader, MatCardContent, MatCardFooter, MatChipSet, MatChip, MatButton, MatExpansionModule, MatDivider, MatGridList, MatGridTile],
+  imports: [CommonModule, MatButton, MatExpansionModule, MatDivider],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './technology-list.component.html',
   styleUrl: './technology-list.component.scss',

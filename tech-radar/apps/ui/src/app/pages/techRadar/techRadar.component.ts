@@ -2,21 +2,18 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { UserRole } from '../../../../../../shared/src/lib/models/user.model';
-import { RouterLink } from '@angular/router';
 import { TechnologyListComponent } from './technology-list/technology-list.component';
 import { RadarComponent } from './radar/radar.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TechnologyService } from '../../services/technology.service';
 import { TechnologyDTO } from '../../../../../../shared/src/lib/models/technology.model';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  TechnologyDialogComponent,
-} from './technology-dialog/technology-dialog.component';
+import { TechnologyDialogComponent } from './technology-dialog/technology-dialog.component';
 import { SaveActionType, TechnologyDialogMode } from './technology-dialog/technology-dialog.types';
 
 @Component({
   selector: 'app-tech-radar',
-  imports: [CommonModule, RouterLink, TechnologyListComponent, RadarComponent, NavbarComponent],
+  imports: [CommonModule, TechnologyListComponent, RadarComponent, NavbarComponent],
   templateUrl: './techRadar.component.html',
   styleUrl: './techRadar.component.scss',
   standalone: true
