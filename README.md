@@ -7,6 +7,7 @@
 
 - [Projektbeschreibung](docs/project_description.md)
 - [Projektdokumentation](docs/ar42/project_documentation.md)
+- [Reflexio und Fazit](docs/reflection_fazit.md)
 
 # How to Start the TechRadar Project
 
