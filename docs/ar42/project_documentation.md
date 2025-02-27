@@ -1,4 +1,6 @@
+# Architekturdokumentation Tech-Radar Weblab
 <!-- TOC -->
+* [Architekturdokumentation Tech-Radar Weblab](#architekturdokumentation-tech-radar-weblab)
 * [1. Einführung und Ziele](#1-einführung-und-ziele)
     * [Zweck:](#zweck)
     * [Hauptziele:](#hauptziele)
@@ -331,8 +333,6 @@ Dies erhöht die Wartbarkeit, da Services unabhängig voneinander getestet und e
 | Hoch      | Benutzerfreundlichkeit             | Der Technologie-Radar-Viewer soll neben der Desktop-Ansicht, auch für die Mobile-Ansicht optimiert sein.                                          |
 | Hoch      | Benutzerfreundlichkeit/Performance | Der Technologie-Radar-Viewer soll innert 1s geladen sein.                                                                                         |
 | Hoch      | Sicherheit/Nachvollziehbarkeit     | Sämtliche Anmeldungen an die Technologie-Radar-Administration werden aufgezeichnet.                                                               |
-|
-|
 
 # 11. Risiken und technische Schulden
 
@@ -342,7 +342,7 @@ Dies erhöht die Wartbarkeit, da Services unabhängig voneinander getestet und e
 | R1 | Sicherheitsrisiko durch JWT in Cookies           | Falls httpOnly-Cookies kompromittiert werden, kann ein Angreifer sich als Nutzer ausgeben.          | Zusätzliche Absicherung durch kurze Token-Lebensdauer und regelmässige Token-Invalidierung. |
 | R2 | Fehlende API-Dokumentation                       | Ohne klare API-Dokumentation können Integrationen und Wartung erschwert werden.                     | OpenAPI-Spezifikationen konsequent pflegen und dokumentieren, im besten Fall automatisiert  |
 | R3 | Dateninkonsistenz durch gleichzeitige Änderungen | Wenn mehrere Benutzer gleichzeitig Daten bearbeiten, können unerwartete Überschreibungen auftreten. | Transaktionen einbauen                                                                      |
-|    |                                                  |                                                                                                     |                                                                                             |
+| R4 | Duplizierte Validierung (BE & FE)                | Beeinträchtigt Single Source of Truth und kann in Zukunft zu Bug führen.                            | Validierung konsolidieren                                                                   |
 
 ## 11.1 Technical Depth
 
