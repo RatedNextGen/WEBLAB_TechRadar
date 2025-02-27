@@ -6,7 +6,7 @@
 # Project description and documentation (in German)
 
 - [Projektbeschreibung](docs/project_description.md)
-- [Projektdokumentation](docs/ar42/project_documentation.md) 
+- [Projektdokumentation](docs/arc42/project_documentation.md) 
   - **Please use light mode else the diagrams will be hard to read!** 
 - [Reflexion und Fazit](docs/reflection_fazit.md)
 
