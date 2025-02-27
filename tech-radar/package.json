@@ -1,8 +1,15 @@
 {
   "name": "@tech-radar/source",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
-  "scripts": {},
+  "author": {
+    "name": "Nevilan Sabanathan",
+    "email": "nevilan.sabanathan@stud.hslu.ch"
+  },
+  "scripts": {
+    "ui": "nx serve ui",
+    "api": "nx serve api"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~19.1.0",

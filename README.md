@@ -41,10 +41,15 @@ Set a jwt secret
 JWT_SECRET=your-secret-key
 ```
 
-## 4.Start projects
+## 4.Start project (inside tech-radar folder)
 ```sh
  nx serve ui
  nx serve api
+``` 
+or 
+```sh
+ npm run ui
+ npm run api
 ``` 
 The backend has a small script that provisions a set of users and some technologies on every start.
 For more info checkout the [config](tech-radar/apps/api/src/config/database.ts).
