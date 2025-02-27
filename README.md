@@ -3,11 +3,12 @@
 [![Code Coverage](https://codecov.io/gh/RatedNextGen/WEBLAB_TechRadar/branch/main/graph/badge.svg)](https://codecov.io/gh/RatedNextGen/WEBLAB_TechRadar)
 [![CI](https://github.com/ratednextgen/WEBLAB_TechRadar/actions/workflows/ci.yml/badge.svg)](https://codecov.io/gh/RatedNextGen/WEBLAB_TechRadar)
 
-# Project description and documentation
+# Project description and documentation (in German)
 
 - [Projektbeschreibung](docs/project_description.md)
-- [Projektdokumentation](docs/ar42/project_documentation.md)
-- [Reflexio und Fazit](docs/reflection_fazit.md)
+- [Projektdokumentation](docs/ar42/project_documentation.md) 
+  - **Please use light mode else the diagrams will be hard to read!** 
+- [Reflexion und Fazit](docs/reflection_fazit.md)
 
 # How to Start the TechRadar Project
 
