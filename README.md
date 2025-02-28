@@ -9,6 +9,7 @@
 - [Projektdokumentation](docs/arc42/project_documentation.md) 
   - **Please use light mode else the diagrams will be hard to read!** 
 - [Reflexion und Fazit](docs/reflection_fazit.md)
+- [Arbeitsjournal](docs/time_journal.xlsx)
 
 # How to Start the TechRadar Project
 
@@ -16,8 +17,10 @@
 
 Before starting the project, make sure you have the following installed:
 
-- **Node.js** (Recommended: 20+)
+- **Node.js**
+  - Version: Recommended: 20+
 - **MongoDB** (Ensure a local/dockerized or cloud-based MongoDB instance is running with default username, password)
+  - Version: Recommended: 8+
 - **Git** (For cloning the repository)
 
 ## 1. Clone the Repository
@@ -31,6 +34,8 @@ cd WEBLAB_TechRadar/tech-radar
 
 ```sh
 npm install
+or 
+npm ci
 ```
 
 ## (optional) 3.Create .env file within tech-radar folder
@@ -42,6 +47,7 @@ JWT_SECRET=your-secret-key
 ```
 
 ## 4.Start project (inside tech-radar folder)
+if you have nx installed globally
 ```sh
  nx serve ui
  nx serve api
