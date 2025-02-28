@@ -17,7 +17,7 @@
 Before starting the project, make sure you have the following installed:
 
 - **Node.js** (Recommended: 20+)
-- **MongoDB** (Ensure a local/dockerized or cloud-based MongoDB instance is running)
+- **MongoDB** (Ensure a local/dockerized or cloud-based MongoDB instance is running with default username, password)
 - **Git** (For cloning the repository)
 
 ## 1. Clone the Repository
